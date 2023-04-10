@@ -1110,7 +1110,7 @@ class ShowDashboard(LoginRequiredMixin, generic.DetailView):
             # We fill up the table with comun avatar image,
             # basic bio and 100 exp
             exp = 100
-            bio = 'I just signed up to Testnet Organizer....'
+            bio = 'I just signed up to the App....'
             avatar = (
                 "https://res.cloudinary.com/dqnhlza2r/image/upload/" +
                 "v1674941682/ubcbtybbvu9b1zmvgiza.png")

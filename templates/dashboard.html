@@ -9,24 +9,24 @@
 
 <!-- If User is blocked by Admin we display it -->
 {% if object.user_info.user_status == 2 %}
-    {% include "app/inc/user_blocked.html" %}
+{% include "app/inc/user_blocked.html" %}
 {% endif %}
 <div class="row">
     <!-- 4 Boxes with informations about the user interaction with the app -->
     <!-- Box 1 -->
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-bottom-success shadow h-75 py-2">
+        <div class="card  shadow h-75 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="h6 text-success  mb-1">
+                        <div class="h4 text-primary  mb-1">
                             Testnets
                         </div>
-                        <div class="h1_extra_big mb-0 text-gray-800">{{ object.user_info.nb_testnet }}</div>
+                        <div class="h1_extra_big mb-0 text-primary">{{ object.user_info.nb_testnet }}</div>
                     </div>
                     <div class="col-auto">
                         <div class="sidebar-brand-icon rotate-n-15">
-                            <i class="fas fa-laugh-wink fa-3x text-success"></i>
+                            <i class="fas fa-laugh-wink fa-3x text-primary"></i>
                         </div>
                     </div>
                 </div>
@@ -35,14 +35,14 @@
     </div>
     <!-- Box 2 -->
     <div class="col-xl-3 col-md-6 mb-4 ">
-        <div class="card border-bottom-primary shadow h-75 py-2">
+        <div class="card shadow h-75 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center ">
                     <div class="col mr-2">
-                        <div class="h6 text-primary mb-1 ">
+                        <div class="h4 text-primary mb-1 ">
                             Followers
                         </div>
-                        <div class="h1_extra_big mb-0 text-gray-800">{{ object.user_info.nb_followers }}</div>
+                        <div class="h1_extra_big mb-0 text-primary">{{ object.user_info.nb_followers }}</div>
                     </div>
                     <div class="col-auto">
                         <div class="sidebar-brand-icon rotate-n-15">
@@ -55,24 +55,25 @@
     </div>
     <!-- Box 3 -->
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-bottom-info shadow h-75 py-2">
+        <div class="card shadow h-75 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="h6 font-weight-bold text-info mb-1">
+                        <div class="h4 font-weight-bold text-primary mb-1">
                             Copied
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
-                                <div class="h1_extra_big mb-0 mr-3 text-gray-800">{{ object.user_info.nb_copied_testnet }}</div>
+                                <div class="h1_extra_big mb-0 mr-3 text-primary">
+                                    {{ object.user_info.nb_copied_testnet }}</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-auto">
                         <div class="sidebar-brand-icon rotate-n-15">
-                            <i class="fa-sharp fa-solid fa-clone text-info fa-3x"></i>
+                            <i class="fa-sharp fa-solid fa-clone text-primary fa-3x"></i>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -80,20 +81,20 @@
     </div>
     <!-- Box 4 -->
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-bottom-secondary shadow h-75 py-2">
+        <div class="card shadow h-75 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="h6 font-weight-bold text-secondary mb-1">
+                        <div class="h4 font-weight-bold text-primary mb-1">
                             Notification(s)
                         </div>
-                        <div class="h1_extra_big mb-0 text-gray-800">{{ object.user_info.nb_notifications }}</div>
+                        <div class="h1_extra_big mb-0 text-primary">{{ object.user_info.nb_notifications }}</div>
                     </div>
                     <div class="col-auto">
                         <div class="sidebar-brand-icon rotate-n-15">
-                            <i class="fa-solid fa-comment fa-3x text-secondary"></i>
+                            <i class="fa-solid fa-comment fa-3x text-primary"></i>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="container-fluid my-2">
@@ -101,7 +102,8 @@
                         <div class="col-lg-12 col-sm-12 col-md-12 py-3">
                             <!-- Only "Show" button available if this is the user connected -->
                             {% if object.user_info.get_object_user == request.user %}
-                            <a class=" btn btn-secondary btn-user btn-block" href="{% url 'show_notifications' request.user.username %}">Show</a>
+                            <a class=" btn btn-primary btn-user btn-block"
+                                href="{% url 'show_notifications' request.user.username %}">Show</a>
                             {% endif %}
                         </div>
                     </div>
@@ -115,39 +117,44 @@
     <div class="col-lg-6 mb-4">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">MISSIONS</h6>
+                <h5 class="m-0 font-weight-bold text-primary">MISSIONS</h5>
             </div>
             <div class="card-body">
-                <h4 class="small font-weight-bold">LEVEL: {{ object.user_info.get_level_user }}
-                    <span class="float-right">{{ object.user_info.exp }} / {{ object.user_info.current_level_xp_max }} EXP </span>
+                <h4 class="small font-weight-bold">Level : {{ object.user_info.get_level_user }}
+                    <span class="float-right">{{ object.user_info.exp }} / {{ object.user_info.current_level_xp_max }}
+                        xp </span>
                 </h4>
                 <div class="progress mb-4">
-                    <div class="progress-bar bg-info" role="progressbar" style="width: {{ object.user_info.pourc_accomplished_exp }}%" aria-valuenow="20"
+                    <div class="progress-bar bg-info" role="progressbar"
+                        style="width: {{ object.user_info.pourc_accomplished_exp }}%" aria-valuenow="20"
                         aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
-                <h4 class="small font-weight-bold">CREATE {{ object.user_info.current_nb_testnet_to_do  }} TESTNETS
+                <h4 class="small font-weight-bold">Create {{ object.user_info.current_nb_testnet_to_do  }} Testnet(s)
                     <span class="float-right">{{ object.user_info.pourc_accomplished_testnet }}%</span>
                 </h4>
                 <div class="progress mb-4">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{ object.user_info.pourc_accomplished_testnet }}%" aria-valuenow="20"
+                    <div class="progress-bar bg-primary" role="progressbar"
+                        style="width: {{ object.user_info.pourc_accomplished_testnet }}%" aria-valuenow="20"
                         aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
-                <h4 class="small font-weight-bold">FOLLOWED BY {{ object.user_info.current_follow_max }} USERS
+                <h4 class="small font-weight-bold">Followed by {{ object.user_info.current_follow_max }} Users
                     <span class="float-right">{{ object.user_info.pourc_accomplished_followers }} %</span>
                 </h4>
                 <div class="progress mb-4">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{ object.user_info.pourc_accomplished_followers }}%"
-                        aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-warning" role="progressbar"
+                        style="width: {{ object.user_info.pourc_accomplished_followers }}%" aria-valuenow="40"
+                        aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
-                <h4 class="small font-weight-bold"> {{ object.user_info.current_copied_testnet_max }} COPIED TESTNETS
+                <h4 class="small font-weight-bold"> {{ object.user_info.current_copied_testnet_max }} Copied Testnet(s)
                     <span class="float-right">{{ object.user_info.pourc_accomplished_copied_testnet }} %</span>
                 </h4>
                 <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ object.user_info.pourc_accomplished_copied_testnet }}%"
-                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar bg-success" role="progressbar"
+                        style="width: {{ object.user_info.pourc_accomplished_copied_testnet }}%" aria-valuenow="80"
+                        aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
             </div>
@@ -157,212 +164,215 @@
     <div class="col-lg-6 mb-4">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary align-center">
-                    {{ object.username }} 
-                    {% if object.user_info.status == 1 %}
-                        <code>( Connected as Administrator) </code>
-                    {% else %}
-                        <code>( Connected as Normal user) </code>
-                    {% endif %}
-                </h6>
+                <h5 class="m-0 font-weight-bold text-primary align-center">
+                    {{ object.username }}
+                </h5>
             </div>
+            
             <div class="row">
                 <div class="col mb-2 ">
                     {% if object.user_info.debank %}
-                        <p>Debank Adress :
-                            <a href="{{ object.user_info.debank }}" target="_blank">Check it out</a>
-                        </p>
+                    <p>Debank Adress :
+                        <a href="{{ object.user_info.debank }}" target="_blank">Check it out</a>
+                    </p>
                     {% endif %}
-                    
+
                     <p>Register : {{ object.date_joined|date  }}</p>
                     {% if object.user_info.last_testnet == "Not created yet" %}
-                        <p>My Last Created Testnet : 
-                            <p class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                "Not created yet"
-                            </p>
-                        </p>
+                    <p class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">Last Testnet : "Not created yet"</p>
                     {% else %}
-                        <p>My Last Created Testnet : 
-                            <a href="{% url 'showtestnet' object.user_info.last_testnet_slug %}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                <i class="fas fa-download fa-sm text-white-50"></i>
-                                {{ object.user_info.last_testnet }}
-                            </a>
-                        </p>
+                    <p>My Last Created Testnet :
+                        <a href="{% url 'showtestnet' object.user_info.last_testnet_slug %}"
+                            class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-download fa-sm text-white-50"></i>
+                            {{ object.user_info.last_testnet }}
+                        </a>
+                    </p>
                     {% endif %}
-                    <i>
-                        {{ object.user_info.bio }}
-                    </i>
+                    <p>
+                        <i>
+                            {{ object.user_info.bio }}
+                        </i>
+                    </p>
                 </div>
                 <div class="col mb-2">
                     <img src="{{ object.user_info.avatar.url }}" class="logo-user" alt="logo user">
                 </div>
             </div>
+
+
+            
+                
+                
+              
+
+
             <!-- Buttons box for user -->
             <div class="container-fluid my-2">
-                
+
                 {% if object.user_info.get_object_user == request.user %}
-                    <!-- Button Administration dashboard for User with Admin Role -->
-                    {% if object.is_authenticated and object.user_info.status == 1 %}
-                        <div class="row my-2">
-                            <div class="col-lg-6 col-sm-12 col-md-6 py-3 ">
-                                <a href="{% url 'administrate_users' %}" class=" btn btn-secondary btn-user btn-block">
-                                    <span>
-                                        <i class="fa-solid fa-lock-open fa-2x"></i>
-                                    </span>
-                                    <span class="h6">
-                                        Board users
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="col-lg-6 col-sm-12 col-md-6 py-3 ">
-                                <a href="{% url 'administrate_testnet' %}" class=" btn btn-secondary btn-user btn-block">
-                                    <span>
-                                        <i class="fa-solid fa-lock-open fa-2x"></i>
-                                    </span>
-                                    <span class="h6">
-                                        Board Testnets
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    {% endif %}
+                <ul class="nav nav-pills nav-fill">
+                <!-- Button Administration dashboard for User with Admin Role -->
+                {% if object.is_authenticated and object.user_info.status == 1 %}
+                <li class="nav-item">
+                    <a href="{% url 'administrate_users' %}" class=" btn btn-primary btn-user mb-4">
+                        <span>
+                            <i class="fa-solid fa-lock-open fa-2x"></i>
+                        </span>
+                        <span class="h6">
+                            Board users
+                        </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'administrate_testnet' %}" class=" btn btn-primary btn-user mb-4">
+                        <span>
+                            <i class="fa-solid fa-lock-open fa-2x"></i>
+                        </span>
+                        <span class="h6">
+                            Board Testnets
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
                 <!-- Button Edit Profile -->
+                <li class="nav-item">
+                    <a href="{% url 'update_profile_user' object.user_info.id %}"
+                    class=" btn btn-primary btn-user mb-4">
+                    <span>
+                        <i class="fa-solid fa-pen-to-square fa-2x"></i>
+                    </span>
+                    <span class="h6">
+                        Edit Profile
+                    </span>
+                </a>
+                </li>
+                <li class="nav-item">
+                    <a class=" btn btn-primary btn-user mb-4" href="{% url 'addtestnet' %}">
+                        <span>
+                            <i class="fa-solid fa-plus fa-2x"></i>
+                        </span>
+                        <span class="h6">
+                            Add Testnet
+                        </span>
+                    </a>
+                </li>
+            </ul>
+                {% else %}
+                <!-- If User is displaying a Dashboard from an other User and already following this User, Unfollow button available -->
+                {% if object in request.user.user_info.following.all %}
                 <div class="row my-2">
-                    <div class="col-lg-12 col-sm-12 col-md-12 py-3 ">
-                        <a href="{% url 'update_profile_user' object.user_info.id %}" class=" btn btn-primary btn-user btn-block">
+                    <div class="col-lg-12 col-sm-12 col-md-12 py-3 align-center">
+                        <a class="btn btn-primary btn-user"
+                            href="{% url 'delete_favorite_user' object.user_info.get_object_user.id %}">
                             <span>
-                                <i class="fa-solid fa-pen-to-square fa-2x"></i>
+                                <i class="fa-solid fa-people-arrows fa-2x"></i>
                             </span>
                             <span class="h6">
-                                Edit My Profile
-                            </span>
-                        </a>
-                    </div>
-                </div>
-                <!-- Button Add a New Testnet -->
-                <div class="row my-2">
-                    <div class="col-lg-12 col-sm-12 col-md-12 py-3">
-                        <a class=" btn btn-success btn-user btn-block padding-20px-left" href="{% url 'addtestnet' %}">
-                            <span>
-                                <i class="fa-solid fa-plus fa-2x"></i>
-                            </span>
-                            <span class="h6">
-                                Add a New Testnet
+                                Unfollow this User
                             </span>
                         </a>
                     </div>
                 </div>
                 {% else %}
-                    <!-- If User is displaying a Dashboard from an other User and already following this User, Unfollow button available -->
-                    {% if object in request.user.user_info.following.all %}
-                        <div class="row my-2">
-                            <div class="col-lg-12 col-sm-12 col-md-12 py-3">
-                                <a class="btn btn-warning btn-user btn-block padding-20px-left" href="{% url 'delete_favorite_user' object.user_info.get_object_user.id %}">
-                                    <span>
-                                        <i class="fa-solid fa-people-arrows fa-2x"></i>
-                                    </span>
-                                    <span class="h6">
-                                        Unfollow this User
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    {% else %}
-                    <!-- If User is displaying a Dashboard from an other User and not following this User, Follow button available -->
-                        <div class="row my-2">
-                            <div class="col-lg-12 col-sm-12 col-md-12 py-3">
-                                <a class="btn btn-success btn-user btn-block padding-20px-left" href="{% url 'add_favorite_user' object.user_info.get_object_user.id %}">
-                                    <span>
-                                        <i class="fa-solid fa-people-arrows fa-2x"></i>
-                                    </span>
-                                    <span class="h6">
-                                        Follow this User
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                    {% endif %}
+                <!-- If User is displaying a Dashboard from an other User and not following this User, Follow button available -->
+                <div class="row my-2">
+                    <div class="col-lg-12 col-sm-12 col-md-12 py-3 align-center">
+                        <a class="btn btn-primary btn-user "
+                            href="{% url 'add_favorite_user' object.user_info.get_object_user.id %}">
+                            <span>
+                                <i class="fa-solid fa-people-arrows fa-2x"></i>
+                            </span>
+                            <span class="h6">
+                                Follow this User
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
                 {% endif %}
             </div>
         </div>
     </div>
 </div>
-    <!-- Listing of the all testnet created by current displayed user on URL-->
-    <div class="row my-1">
-        <div class="col-lg-8 col-sm-12 col-md-8 py-2">
-            <p class="h2 text-primary" >
-                Last Testnet(s) deployed by <code>{{ object.user_info.get_object_user.username }}</code>
+<!-- Listing of the all testnet created by current displayed user on URL-->
+<div class="row my-1">
+    <div class="col-lg-8 col-sm-12 col-md-8 py-2">
+        <p class="h5 text-primary">
+            Last Testnet(s) from {{ object.user_info.get_object_user.username }}
+        </p>
+        <br>
+        <h3><span class="badge badge-danger">Time Copied</span>
+        <span class="badge badge-primary">Network</span>
+        <span class="badge badge-secondary">Category</span>
+        <span class="badge badge-success">Testnet, Devnet or Mainnet</span>
+        <span class="badge badge-info">Wallet I</span>
+        <span class="badge badge-warning">Wallet II</span></h3>
+    </div>
+    <div class="col-lg-4 col-sm-12 col-md-4 py-2 align-right">
+        <a href="{% url 'showtestnetall' object.user_info.user.username %}" class="btn btn-primary  btn-user">
+            <p class="h5">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                Search a testnet
             </p>
-            <br>
-            <span class="badge badge-danger">Time Copied</span>
-            <span class="badge badge-primary">Network</span>
-            <span class="badge badge-secondary">Category</span>
-            <span class="badge badge-success">Testnet, Devnet or Mainnet</span>
-            <span class="badge badge-info" >Wallet I</span>
-            <span class="badge badge-warning">Wallet II</span>
+        </a>
+    </div>
+</div>
+{% for testnet in object.user_info.show_testnet_user %}
+<div class="container-fluid bg-light border-all-around-radius my-2">
+    <div class="row my-2">
+        <div class="col-lg-10 col-sm-12 col-md-10 py-3">
+            <h6 class=" font-weight-bold text-primary align-left padding-20px-left">
+                <a href="{% url 'showtestnet' testnet.slug %}" class="no-decoration">
+                    <p class="h5 text-secondary"><i class="fa-solid fa-house text-primary"></i>
+                        {{ testnet.testnet_name }}
+                        <span class="badge badge-danger">Copied : X {{ testnet.copied_nb }}</span>
+                        <span class="badge badge-primary">{{ testnet.network_name }}</span>
+                        <span class="badge badge-secondary">{{ testnet.category }}</span>
+                        <span class="badge badge-success">{{ testnet.network_status }}</span>
+                        {% if testnet.wallet1_name %}
+                        <span class="badge badge-info">{{ testnet.wallet1_name }}</span>
+                        {% endif %}
+                        {% if testnet.wallet2_name %}
+                        <span class="badge badge-warning">{{ testnet.wallet2_name }}</span>
+                        {% endif %}
+                    </p>
+                </a>
+            </h6>
         </div>
-        <div class="col-lg-4 col-sm-12 col-md-4 py-2">
-            <a href="{% url 'showtestnetall' object.user_info.user.username %}" class="btn btn-primary  btn-user btn-block">
-                <p class="h5" >
-                    <i class="fa-solid fa-magnifying-glass"></i>  
-                    Search a testnet
-                </p>
+        <div class="col-lg-2 col-sm-12 col-md-2 py-3">
+            <a href="{% url 'showtestnet' testnet.slug %}" class=" btn btn-info btn-user btn-block">
+                <i class="fa-solid fa-eye"></i>
+                Show
+            </a>
+        </div>
+
+    </div>
+</div>
+{% empty %}
+<!-- If no Testnet registered for this User-->
+<div class="container-fluid border-all-around-radius my-2">
+    <div class="row my-5">
+        <div class="col-lg-12 col-sm-12 col-md-12 py-2">
+            <p class="h3 text-primary"> No testnet for this user...</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- If user has at least 1 Testnet registered we display a Button "Show More" on Dashboard section -->
+{% if object.user_info.show_testnet_user %}
+<div class="container-fluid my-2">
+    <div class="row my-5">
+        <div class="col-lg-12 col-sm-12 col-md-12 py-2 align-center">
+            <a href="{% url 'showtestnetall' object.user_info.user.username %}"
+                class="btn btn-primary btn-user">
+                <i class="fa-solid fa-eye"></i>
+                <p class="h4">Show more...</p>
             </a>
         </div>
     </div>
-    {% for testnet in object.user_info.show_testnet_user %}
-        <div class="container-fluid bg-light border-all-around-radius my-2">
-            <div class="row my-2">
-                <div class="col-lg-10 col-sm-12 col-md-10 py-3">
-                    <h6 class=" font-weight-bold text-primary align-left padding-20px-left">
-                        <a href="{% url 'showtestnet' testnet.slug %}" class="no-decoration">
-                            <p class="h5 text-secondary"><i class="fa-solid fa-house text-primary"></i>    {{ testnet.testnet_name }} 
-                                <span class="badge badge-danger">Copied : X {{ testnet.copied_nb }}</span>
-                                <span class="badge badge-primary" >{{ testnet.network_name }}</span>
-                                <span class="badge badge-secondary" >{{ testnet.category }}</span>
-                                <span class="badge badge-success" >{{ testnet.network_status }}</span>
-                                {% if testnet.wallet1_name %}
-                                    <span class="badge badge-info" >{{ testnet.wallet1_name }}</span>
-                                {% endif %}
-                                {% if testnet.wallet2_name %}
-                                    <span class="badge badge-warning" >{{ testnet.wallet2_name }}</span>
-                                {% endif %}
-                            </p>
-                        </a>
-                    </h6>
-                </div>
-                <div class="col-lg-2 col-sm-12 col-md-2 py-3">
-                    <a href="{% url 'showtestnet' testnet.slug %}" class=" btn btn-info btn-user btn-block">
-                        <i class="fa-solid fa-eye"></i>
-                        Show
-                    </a>
-                </div>
-
-            </div>
-        </div>
-    {% empty %}
-        <!-- If no Testnet registered for this User-->
-        <div class="container-fluid bg-light my-2">
-            <div class="row my-5">
-                <div class="col-lg-12 col-sm-12 col-md-12 py-2">
-                    <p class="h3 text-info"> No testnet registered for this user...</p>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-    <!-- If user has at least 1 Testnet registered we display a Button "Show More" on Dashboard section -->
-    {% if object.user_info.show_testnet_user %}
-    <div class="container-fluid my-2">
-        <div class="row my-5">
-            <div class="col-lg-12 col-sm-12 col-md-12 py-2">
-                <a href="{% url 'showtestnetall' object.user_info.user.username %}" class="btn btn-primary btn-user btn-block">
-                    <i class="fa-solid fa-eye"></i>
-                    <p class="h4" >Show more...</p>
-                </a>
-            </div>
-        </div>
-    </div>
-    {% endif %}
+</div>
+{% endif %}
 <!-- End Listing of the all testnet created by current user-->
-<br><br><hr><br><br>
+<br>
 {%endblock%}
