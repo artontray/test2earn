@@ -1,0 +1,197 @@
+@font-face {
+    font-family: "Ubuntu";
+    src: url("../fonts/Ubuntu/Ubuntu-Regular.ttf");
+
+}
+
+/*----------------------------------------Logo-----*/
+.logo{
+    height: 110px;
+    width: 110px;
+}
+
+.logo-user{
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+
+}
+
+.logo-user-display-all{
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+
+}
+/*----------------------------------------Colors-----*/
+:root {
+    --color-primary: #E0F1FF;
+    --color-secondary: #3ca7ff;
+    
+    --color-white: #FFF;
+    --color-black: #000;
+    --color-main-1: #C7E5FF;
+    --color-main-2: #CBDAFF;
+    --color-main-3: #97CFFF;
+    --color-main-4: #7AC1FF;
+    --color-main-5: #5FB4FF;
+    --color-main-6: hsl(240, 50%, 70%);
+ 
+  }
+/*----------------------------------------Borders-----*/
+.border-all-around{
+    border : 1px solid var(--color-black);
+}
+.border-all-around-radius{
+    border-radius: 22px;
+    padding: 10px 10px;
+    border : 1px solid var(--color-primary);
+}
+/*----------------------------------------Body-----*/
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family:  Ubuntu, Georgia, serif, Helvetica, Arial, sans-serif;
+  scroll-behavior: smooth;
+}
+
+/*----------------------------------------Rows/Cols-----*/
+.row {
+    margin: 15px;
+    margin-top: 0;
+}
+.sub-row{
+    margin:0;
+}
+
+.sub-row:not(:first-child){
+    margin-top: 10px;
+}
+.col {
+    margin: 15px;
+}
+.padding-10-pourcent-left-right{
+    padding-left : 10%;
+    padding-right : 10%;
+}
+
+/*----------------------------------------Scrollable container-----*/
+.scrollable-400px {
+    height:400px;
+    overflow-y: scroll;
+  }
+
+/*----------------------------------------Alert Containers-----*/
+.alert-container .col-12 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/*----------------------------------------Nav Bar-----*/
+
+.navalert-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: var(--color-secondary);
+}
+.active>.nav-link{
+    border-bottom: 1px solid var(--color-primary);
+    color : var(--color-black);
+}
+.navbar .navbar-toggler {
+    border: 0;
+
+}
+.navbar li {
+    text-transform: uppercase;
+}
+
+
+
+/*----------------------------------------Buttons-----*/
+.btn-login{
+    border-radius : 22px;
+    background-color: var(--color-primary);
+    color: #000;
+    font-size: 14px;
+}
+
+.btn-login:hover{
+    background-color: var(--color-primary);
+    color: #000;
+}
+
+.btn-login:hover a{
+    text-decoration: none;
+}
+
+.dropdown-item:hover{
+    background-color:var(--color-primary);
+}
+
+/*----------------------------------------Text Layout-----*/
+.align-center{
+    text-align: center;
+}
+.align-left{
+    text-align: left;
+}
+.align-right{
+    text-align: right;
+}
+.padding-20px-left{
+    padding-left : 20px;
+}
+.padding-5px-left{
+    padding-left : 5px;
+}
+.h1_extra_big{
+    font-size: 46px;
+}
+.align-justify{
+    text-align: justify;
+}
+
+.long-string{
+    width:100%;
+    word-wrap:break-word;
+    display:inline-block;
+}
+
+code {
+    font-weight: 700;
+    color:rgb(44, 58, 255);
+}
+/*----------------------------------------Footer-----*/
+.current-version{
+    font-size: 12px;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+footer{
+    bottom: 0;
+}
+
+/*----------------------------------------Container Box-----*/
+.container-box{
+    height: 100vh;
+    padding:15px;
+    margin:20px auto;
+}
+
+/*----------------------------------------Links-----*/
+
+.no-decoration:link{
+    text-decoration: none;
+}
+

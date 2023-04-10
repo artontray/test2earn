@@ -1,0 +1,8 @@
+<div class="form-group {{ cols|default:'' }}">
+  <label for="{{ label_tag }}" class="h5 {{ color|default:'text-primary' }}">
+    <i class="{{ icone }}"></i> 
+    {{ field.label_tag }}
+  </label>
+    {{ field }}
+    {{ field.errors }}
+</div>

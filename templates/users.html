@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h3 class="mb-0 text-xl font-weight-bold badge-primary border-all-around-radius">Community</h3>
+</div>
+
+<!-- Listing of the most active Users of the App -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-4 col-md-12 mb-12">
+            <i class="fa-regular fa-trophy-star fa-2x"></i>
+            <h2 class="mb-0 font-weight-bold">
+                {% if searching_user %}Searching "{{ searching_user }}" {% else %}Most active Users {% endif %}
+            </h2>
+        </div>
+        <div class="col-xl-8 col-md-12 mb-12 align-right py-3">
+            <!-- SEARCH FORM for Users -->
+            <form id="searchform" action="#" method="get" accept-charset="utf-8">
+                <span>
+                    <input class="searchfield" id="searchbox" minlength=3 name="searching_user" type="text"
+                        placeholder="Search" value="{% if searching_user %}{{ searching_user }}{% endif %}">
+                </span>
+                <span>
+                    <button class="searchbutton" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+                <!-- If searching users, we display a new Button "Show All" to get back to display all most active users -->
+                {% if searching_user %}
+                <span>
+                    <a class=" btn btn-primary" href="{% url 'showusers' %}">Show All</a>
+                </span>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-8 col-md-12 mb-12">
+            <span><i class="fa-solid fa-screwdriver-wrench  text-primary"></i> Admin(s) role</span>
+            <span><i class="fa-solid fa-star  text-primary"></i>Following</span>
+            <span><i class="fa-regular fa-star  text-primary"></i>Not Following</span>
+            <span><i class="fa-solid fa-star   text-success"></i>You</span>
+        </div>
+    </div>
+    <div class="row">
+        {% for current_user in show_users %}
+        <!-- User Card -->
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-4">
+            <div class="card shadow h-100 py-2">
+                <div class="row ">
+                    <div class="col-xl-12 col-md-12 mb-6 ">
+                        <!-- If User is the current logged User-->
+                        {% if current_user.user == user %}
+                            <button type="button" class="btn" data-toggle="modal" data-target="#">
+                                <span><i class="fa-solid fa-star fa-2x  text-success"></i></span>
+                            </button>
+                            <div class="h5 font-weight-bold text-success align-center">
+                                
+                                <a
+                                    href="{% url 'dashboard' current_user %}">{{ current_user.user.username}}</a>
+                            </div>
+                        {% else %}
+                            <!-- If user is on the following list of current logged user, Unfollow Button available-->
+                            {% if current_user.user in user.user_info.following.all %}
+                                <button type="button" class="btn" data-toggle="modal"
+                                    data-target="#UnFollowThisUser{{ current_user.user.id }}">
+                                    <span><i class="fa-solid fa-star fa-2x  text-primary"></i></span>
+                                </button>
+                                <div class="modal" id="UnFollowThisUser{{ current_user.user.id }}" tabindex="-1"
+                                    aria-labelledby="UnFollowThisUserLabel{{ current_user.user.id }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title h3 text-secondary"
+                                                    id="UnFollowThisUserLabel{{ current_user.user.id }}">
+                                                    <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-2x"></i>
+                                                </h5>
+                                            </div>
+                                            <form method="get" action="{% url 'delete_favorite_user' current_user.user.id %}">
+                                                {% csrf_token %}
+                                                <div class="modal-body">
+                                                    <p class="h5 font-weight-bold text-primary align-center">
+                                                        Do you want to Unfollow {{ current_user.user.username }} ? </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success btn-user">
+                                                        Yes
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-user" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        No
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% else %}
+                            <!-- If user is not on the following list of current logged user, follow Button available-->
+                                <button type="button" class="btn" data-toggle="modal"
+                                    data-target="#FollowThisUser{{ current_user.user.id }}">
+                                    <span><i class="fa-regular fa-star fa-2x text-primary"></i></span>
+                                </button>
+                                <div class="modal" id="FollowThisUser{{ current_user.user.id }}" tabindex="-1"
+                                    aria-labelledby="FollowThisUserLabel{{ current_user.user.id }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title h3 text-secondary"
+                                                    id="FollowThisUserLabel{{ current_user.user.id }}">
+                                                    <i class="fa-sharp fa-solid fa-circle-exclamation fa-2x"></i>
+                                                </h5>
+                                            </div>
+                                            <form method="get" action="{% url 'add_favorite_user' current_user.user.id %}">
+                                                {% csrf_token %}
+                                                <div class="modal-body">
+                                                    <p class="h5 font-weight-bold text-primary align-center">
+                                                        Do you want to start following {{ current_user.user.username }} ? </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success btn-user">
+                                                        Yes
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-user" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        No
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <!-- If user have admin role, we display a little icon on it-->
+                            {% if current_user.status == 1 %}
+                                <div class="h4 font-weight-bold text-primary align-center">
+                                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                                    
+                                    <a
+                                    href="{% url 'dashboard' current_user %}">{{ current_user.user.username}}</a>
+                                </div>
+                            {% else %}
+                            <!-- If normal user-->
+                                <div class="h5 font-weight-bold text-primary align-center">
+                                    <a
+                                    href="{% url 'dashboard' current_user %}">{{ current_user.user.username}}</a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-xl-12 col-md-12 ">
+                        <div class="mb-1 align-center">
+                            <img src="{{ current_user.avatar.url }}" class="logo-user-display-all"
+                                alt="logo user">
+                        </div>
+                    </div>
+                </div>
+                <!-- User Info-->
+                <div class="container-fluid  my-2">
+                    <div class="row my-2">
+                        <div class="d-xs-block col-lg-9 col-md-9 ">
+                            <h6 class=" font-weight-bold text-primary align-center">Testnet(s)</h6>
+                        </div>
+                        <div class="d-xs-block col-lg-3 col-md-3 ">
+                            <h6 class=" font-weight-bold text-primary align-center"> {{ current_user.nb_testnet }}</h6>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="d-xs-block col-lg-9 col-md-9 ">
+                            <h6 class=" font-weight-bold text-primary align-center">Follower(s)</h6>
+                        </div>
+                        <div class="d-xs-block col-lg-3 col-md-3">
+                            <h6 class=" font-weight-bold text-primary align-center"> {{ current_user.nb_followers }}
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="card-body">
+                        <h6>Level {{ current_user.get_level_user }}<span
+                                class="float-right">{{ current_user.exp }} / {{ current_user.current_level_xp_max }}
+                                xp</span>
+                        </h6>
+                        <div class="progress mb-4">
+                            <div class="progress-bar bg-info" role="progressbar"
+                                style="width: {{ current_user.pourc_accomplished_exp }}%" aria-valuenow="20" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        {% empty %}
+        <!-- There is no User to show-->
+        <div class="container-fluid bg-light border-all-around-radius my-2">
+            <div class="row my-2">
+                <div class="col-lg-12 col-sm-12 col-md-12 py-3">
+                    <p><i class="fa-solid fa-users-slash fa-2x"></i> No users to show...</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- End Listing of Users-->
+<br><br><hr><br><br>
+{%endblock%}

@@ -28,6 +28,14 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = ["test2earn.herokuapp.com", "localhost"]
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+EXP_PER_ACTION = 100
+FOLLOWERS_FOR_LEVEL1 = 5
+COEFF_FOR_LEVEL_UP = 1.4
+TESTNET_CREATED_FOR_LEVEL1 = 5
+TESTNET_TO_COPY_FOR_LEVEL1 = 5
+EXP_FOR_LEVEL1 = (FOLLOWERS_FOR_LEVEL1+TESTNET_CREATED_FOR_LEVEL1+TESTNET_TO_COPY_FOR_LEVEL1)*EXP_PER_ACTION
 
 
 
@@ -39,11 +47,27 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+    'crispy_forms',
+    'django_summernote',
     'app',
+    'django_extensions',
 ]
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+#CRISPY_TEMPLATES_PACK = 'uni_form'
+CRISPY_TEMPLATES_PACK = 'bootstrap4'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

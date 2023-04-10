@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h3 class="mb-0 text-xl font-weight-bold badge-primary border-all-around-radius">Home</h3>
+</div>
+<!--<div class="row padding-10-pourcent-left-right">
+    <div class="col-xl-12 col-md-12">
+        <div class="text-center">
+            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 45rem;"
+                src="{% static 'assets/images/home_image01.png' %}" alt="home page main Image">
+        </div>
+    </div>
+</div>-->
+<div class="row padding-10-pourcent-left-right">
+    <div class="col-xl-12 col-md-12">
+        <div class="card shadow h-100 mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Welcome to Test2Earn App!</h6>
+            </div>
+            <div class="card-body">
+                <p class="h5 font-weight-bold text-dark align-justify">
+                    Following all of the data that is required during a
+                    testnet can be somewhat complicated, as it often
+                    involves managing multiple pieces of information
+                    and keeping track of different accounts and logins.
+                </p>
+                <br>
+                <p>
+                    For example, you may need to provide an email address
+                    to register for the testnet, and then use that email
+                    to confirm your registration and receive updates about
+                    the testnet. You may also need to create and manage a
+                    Discord account to join the testnet community, and use
+                    that account to communicate with other participants and
+                    receive instructions on how to claim your tokens.
+                    Similarly, you may be required to use a Telegram username
+                    or create a Github account to access certain features
+                    of the testnet.
+                </p>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="row padding-10-pourcent-left-right">
+     Illustrations 2
+    <div class="col-xl-12 col-md-12">
+        <div class="text-center">
+            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 35rem;"
+                src="{% static 'assets/images/home_image02.png' %}" alt="home page main Image">
+        </div>
+    </div>
+</div>
+-->
+<br>
+
+<div class="container-fluid feature-image-outer">
+    <div class="row padding-10-pourcent-left-right">
+        <div class="col-12 col-md-4 mb-2">
+            <div class="feature-image mb-2 align-center">
+                <i class="fa-solid fa-location-crosshairs fa-6x text-primary"></i>
+            </div>
+            <div>
+                <h3 class="feature-title">All in one Place</h3>
+                <p class="feature-text align-justify">
+                    A Testnet Organizer as Test2Earn App can be a valuable tool for anyone
+                    who is interested in testing and experimenting with
+                    new blockchain technologies. It can help users to
+                    easily manage and participate in testnet events,
+                    such as airdrops, faucets, mining pools, and provide
+                    an easy and straightforward way to track and claim
+                    tokens. By using our testnet organizer, you can streamline
+                    your participation in testnet events and save time
+                    and effort.
+                </p>
+            </div>
+        </div>
+        <div class="col-12 col-md-4 mb-2">
+            <div class="feature-image mb-2 align-center">
+                <i class="fa-solid fa-person-walking-arrow-right fa-6x text-info "></i>
+            </div>
+            <h3 class="feature-title">Keep your Focus</h3>
+            <p class="feature-text align-justify">
+                Using an organizer can be important to keep
+                your focus and avoiding loosing time looking
+                for data stored somewhere in your computer.
+                With Test2Earn App, you can easily view,
+                manage, and edit exactly what you need.
+            </p>
+        </div>
+        <div class="col-12 col-md-4 mb-2">
+            <div class="feature-image mb-2 align-center">
+                <i class="fa-solid fa-people-group fa-6x text-success"></i>
+            </div>
+            <h3 class="feature-title">Join a community</h3>
+            <p class="feature-text align-justify">
+                Using Test2Earn App, you will also have access to our
+                community and benefit from the collective knowledge
+                of blockchain enthusiasts.
+                By joining our community of blockchain testers,
+                you can connect with other users who are interested in the
+                same technology and learn from their experiences.
+                You can also access resources and information that
+                you may not otherwise have. Our community of blockchain
+                testers is a place to share knowledge and exchange ideas
+                about this technology.
+            </p>
+        </div>
+    </div>
+</div>
+<br>
+<hr>
+<br>
+<div class="row padding-10-pourcent-left-right">
+    <!-- Stats about the App -->
+    <!-- Box 1 -->
+    <div class="col-xl-6 col-md-6 mb-6 mt-3">
+        <div class="card border-bottom-success shadow h-75 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="h5 font-weight-bold text-success text-uppercase mb-2">
+                            Registered Testnet(s)
+                        </div>
+                        <div class="h2 mb-0 font-weight-bold text-gray-800">{{ nb_testnet }}</div>
+                    </div>
+                    <div class="col-auto d-none d-xl-block">
+                        <div class="sidebar-brand-icon rotate-n-15">
+                            <i class="fas fa-laugh-wink fa-4x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Box 2 -->
+    <div class="col-xl-6 col-md-6 mb-6 mt-3">
+        <div class="card border-bottom-primary shadow h-75 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center ">
+                    <div class="col">
+                        <div class="h5 font-weight-bold text-primary text-uppercase mb-2">
+                            Registered User(s) 
+                        </div>
+                        <div class="h2 mb-0 font-weight-bold text-gray-800">{{  nb_user }} </div>
+                    </div>
+                    <div class="col-auto d-none d-xl-block">
+                        <i class="fa-sharp fa-solid fa-users fa-4x text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row padding-10-pourcent-left-right">
+    <div class="col-xl-12 col-md-12">
+        {% if user.is_authenticated %}
+        <div class="align-center"><a href="{% url 'dashboard' %}" class="btn btn-primary">ENTER THE APP </a></div>
+        {% else %}
+        <div class="align-center"><a href="{% url 'account_login' %}" class="btn btn-primary">CONNECT TO THE APP</a></div>
+        {% endif %}
+    </div>
+</div>
+<br>
+<hr>
+<br>
+{%endblock%}

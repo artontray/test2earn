@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/sb-admin-2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/sb-admin-2.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/favicon-32x32.png' %}">
+    <title>Test2Earn App</title>
+</head>
+
+<body>
+    <header>
+        <!--Navigation Bar-->
+        <nav class="navbar navbar-expand-sm">
+            <!--<img src="{% static 'assets/images/logo.png' %}" class="logo" alt="Logo of the App">-->
+            <!--Button Collapse NavBar for small screens-->
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item mr-2"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                    <!--If user just register to platform, redirect to dashboard directly to create his space on table UserInfo-->
+                    {% if user.is_authenticated and request.user.user_info.user_status == '' %}
+                        <meta http-equiv="refresh" content="1;{% url 'dashboard' %}">
+                    {% endif %}
+                    <!--If user Connected to the App, we displaying the full Nav Bar menu-->
+                    {% if user.is_authenticated %}
+                        <li class="nav-item mr-2"><a class="nav-link" href="{% url 'showusers' %}">Community</a></li>
+                        <li class="nav-item mr-2"><a class="nav-link" href="{% url 'show_new_testnet_all' %}">Testnets</a></li>
+                        <li class="nav-item mr-2"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li class="nav-item mr-2"><a class="btn btn-primary btn-user btn-block" href="{% url 'account_logout' %}">Logout</a></li>
+                    {% else %}
+                    <!--If Not connected, only Connect and Register button available-->
+                        <li class="nav-item mr-2">
+                            <a class="btn btn-success btn-user btn-block" href="{% url 'account_login' %}">Connect</a>
+                        </li>
+                        <li class="nav-item mr-2">
+                            <a class="btn btn-primary btn-user btn-block" href="{% url 'account_signup' %}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Begin Page Content -->
+        <!-- If the logged user is blocked by admin and not an admin himself, it will not be able to do anything else than reading this container -->
+        {% if user.user_info.user_status == 2 and request.user.user_info.user_status != 1 %}
+                <div class="row">
+                    <div class="col-xl-12 col-md-12">
+                        <div class="card shadow h-100 mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="h3 m-0 font-weight-bold text-danger">This account is Blocked</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row my-2">
+                                    <div class="col-xl-12 col-sm-12 col-md-12 ">
+                                        <p>This account is blocked! please contact admin@TestnetOrganizer.com for more information(s)</p>
+                                    </div>
+                                </div>
+                                <br><br><hr><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {% else %}
+            <!-- Displaying Messages when User realized a significant action within the App -->
+            {% if messages  %}
+                {% for message in messages %}
+                    <p {% if message.tags %} class="h5 align-center alert alert-info text-primary"{% endif %}>{{ message }}{% if request.user.is_authenticated %} Please check <a href="{% url 'show_notifications' request.user.username %}"><strong>here</strong></a> for more details!</p>{% endif %}
+                {% endfor %}
+            {% endif %}
+            <!-- Start middle main content of the App -->
+            <div class="container-fluid">
+                {% block content %}
+                <!-- Content Goes here -->
+                {% endblock content %}
+            </div>
+        {% endif %}
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-12">
+                <ul class="list-inline align-center">
+                    <li class="list-inline-item">
+                        <a href="https://twitter.com/Pstprincepeters" target="_blank" aria-label="twitter page" role="links"><i class="fa fa-twitter fa-2x"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://t.me/WAGMIGROUPCHAMMEL" target="_blank" aria-label="instagram page" role="links"><i class="fa fa-telegram fa-2x"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/princepeters_/" target="_blank" aria-label="Gmail page" role="links"><i class="fa fa-instagram fa-2x"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Copyright -->
+        <div class="row">
+            <div class="col-12 align-center">
+                <p>
+                    Copyright. <code>2023</code> Test2Earn App<br>
+                </p>
+                <h6><span class="badge badge-success current-version">Version 1.0.1</span></h6>
+            </div>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/d33bc14455.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="{% static 'assets/bootstrap/bootstrap-4.6.2/js/bootstrap.js' %}"></script>
+</body>
+</html>

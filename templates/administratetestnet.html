@@ -1,0 +1,246 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!-- User Connected and admin role -->
+{% if request.user.is_authenticated and request.user.user_info.status == 1 %}
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="mb-0 text-xl font-weight-bold badge-primary border-all-around-radius">Administrate Testnet(s) on the App
+            {% if searching %}
+                searching... "<i>{{ searching }}</i>"
+            {% endif %}
+        </h1>
+    </div>
+    <!-- Search FORM -->
+    <form id="searchform" action="#" method="get" accept-charset="utf-8">
+        <span>
+            <input class="searchfield" id="searchbox" minlength=3 name="searching" type="text" placeholder="Search"
+                value="{% if searching %}{{ searching }}{% endif %}">
+        </span>
+        <span>
+            <button class="searchbutton" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </span>
+        <span>
+            <a class=" btn btn-primary" href="{% url 'administrate_testnet' %}">Show All Reported Testnet</a>
+        </span>
+    </form>
+    <span><i class="fa-sharp fa-solid fa-circle text-success"></i> Active Testnet </span>
+    <span><i class="fa-sharp fa-solid fa-circle text-danger"></i> Reported Testnet </span>
+    <br>
+    <span class="badge badge-danger">Time Copied</span>
+    <span class="badge badge-primary">Network</span>
+    <span class="badge badge-secondary">Category</span>
+    <span class="badge badge-success">Testnet, Devnet or Mainnet</span>
+    <span class="badge badge-info" >Wallet I</span>
+    <span class="badge badge-warning">Wallet II</span>
+    <!-- Listing of the all Reported Testnet OR Searching result Testnet-->
+    {% for testnet in object_list %}
+        <div class="container-fluid 
+            bg-light border-bottom-{% if testnet.status_testnet == 2  %}danger{% else %}success{% endif %} border-all-around-radius my-2">
+            <div class="row my-2">
+                
+                <div class="col-lg-5 col-sm-12 col-md-5 py-3">
+                    <h6 class=" font-weight-bold text-primary align-left padding-20px-left">
+                        <a href="{% url 'showtestnet' testnet.slug %}" class="no-decoration">
+                            <p class="h5 text-secondary"><i class="fa-solid fa-circle-arrow-right text-info"></i>
+                                {{ testnet.testnet_name }} by <strong>{{ testnet.author }}</strong>
+                                <span class="badge badge-danger">Copied : X {{ testnet.copied_nb }}</span>
+                                <span class="badge badge-primary">{{ testnet.network_name }}</span>
+                                <span class="badge badge-secondary">{{ testnet.category }}</span>
+                                <span class="badge badge-success">{{ testnet.network_status }}</span>
+                                {% if testnet.wallet1_name %}
+                                    <span class="badge badge-info" >{{ testnet.wallet1_name }}</span>
+                                {% endif %}
+                                {% if testnet.wallet2_name %}
+                                    <span class="badge badge-warning">{{ testnet.wallet2_name }}</span>
+                                {% endif %}
+                            </p>
+                        </a>
+                    </h6>
+                </div>
+                <div class="col-lg-1 col-sm-12 col-md-1 py-3">
+                    <h6 class=" font-weight-bold text-primary align-right">
+                        <p class="h5 text-secondary">
+                            {% if testnet.testnet_user == testnet.author %}
+                            <i class="fa-solid fa-person fa-2x"></i>
+                            {% else %}
+                            <i class="fa-regular fa-copy fa-2x"></i>
+                            {% endif %}
+                        </p>
+                    </h6>
+                </div>
+                <!-- Delete Button -->
+                <div class="col-lg-2 col-sm-12 col-md-2 py-3 ">
+                    <button type="button" class="btn btn-danger btn-user btn-block" data-toggle="modal"
+                        data-target="#DeleteTestnet{{ testnet.id }}">
+                        <span><i class="fa-solid fa-trash"></i></span> Delete
+                    </button>
+                    <div class="modal" id="DeleteTestnet{{ testnet.id }}" tabindex="-1"
+                        aria-labelledby="DeleteTestnet{{ testnet.id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title h3 text-secondary" id="DeleteTestnetLabel{{ testnet.id }}">
+                                        <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-4x"></i>
+                                    </h5>
+                                </div>
+                                <form method="get" action="{% url 'delete_testnet' testnet.slug %}">
+                                    {% csrf_token %}
+                                    <div class="modal-body">
+                                        <p class="h4 font-weight-bold text-uppercase text-primary align-center">Do
+                                            you want to Delete this testnet : {{ testnet.testnet_name }} ? 
+                                        </p>
+                                        <br>
+                                        <p>
+                                            All the copied Testnet from this Testnet will be deleted from the app !
+                                        </p>
+                                        <br>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success btn-user">
+                                            YES
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-user" data-dismiss="modal"
+                                            aria-label="Close">
+                                            NO
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Report Button -->
+                <div class="col-lg-2 col-sm-12 col-md-2 py-3">
+                    <!-- Testnet ALready Reported so we display Cancel Report Button -->
+                    {% if testnet.status_testnet == 2  %}
+                        <button type="button" class="btn btn-success btn-user btn-block" data-toggle="modal"
+                            data-target="#UnReportTestnet{{ testnet.id }}">
+                            <span><i class="fa-regular fa-copy"></i></span> Cancel Report
+                        </button>
+                        <div class="modal" id="UnReportTestnet{{ testnet.id }}" tabindex="-1"
+                            aria-labelledby="UnReportTestnet{{ testnet.id }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title h3 text-secondary" id="UnReportTestnetLabel{{ testnet.id }}">
+                                            <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-4x"></i>
+                                        </h5>
+                                    </div>
+                                    <form method="get" action="{% url 'report_testnet' testnet.slug %}">
+                                        {% csrf_token %}
+                                        <div class="modal-body">
+                                            <p class="h4 font-weight-bold text-uppercase text-primary align-center">Do
+                                                you want to cancel report to this following Testnet : {{ testnet.testnet_name }} ?
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success btn-user">
+                                                YES
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-user" data-dismiss="modal"
+                                                aria-label="Close">
+                                                NO
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <!--Admin User cannot report his own Testnet, it makes no sense-->
+                        <!--But an Other Admin can report a Testnet from an other Admin-->
+                        {% if testnet.author == request.user  %}
+                            <button type="button" class="btn btn-danger btn-user btn-block" disabled>
+                                <span><i class="fa-sharp fa-solid fa-bug"></i></span> Cannot Report
+                            </button>
+                        {% else %}
+                            <button type="button" class="btn btn-danger btn-user btn-block" data-toggle="modal"
+                                data-target="#ReportTestnet{{ testnet.id }}">
+                                <span><i class="fa-sharp fa-solid fa-bug"></i></span> Report
+                            </button>
+                            <div class="modal" id="ReportTestnet{{ testnet.id }}" tabindex="-1"
+                                aria-labelledby="ReportTestnet{{ testnet.id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title h3 text-secondary" id="ReportTestnetLabel{{ testnet.id }}">
+                                                <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-4x"></i>
+                                            </h5>
+                                        </div>
+                                        <form method="get" action="{% url 'report_testnet' slug=testnet.slug_original %}">
+                                            {% csrf_token %}
+                                            <div class="modal-body">
+                                                <p class="h4 font-weight-bold text-uppercase text-primary align-center">Do
+                                                    you want to Report this Testnet : {{ testnet.testnet_name }} ? </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-success btn-user">
+                                                    YES
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-user" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    NO
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <!-- End Report Button -->
+                <!-- View Button -->
+                <div class="col-lg-2 col-sm-12 col-md-2 py-3">
+                    <a href="{% url 'showtestnet' testnet.slug %}" class=" btn btn-info btn-user btn-block">
+                        <i class="fa-solid fa-eye"></i>
+                        View
+                    </a>
+                </div>
+                <!-- End View Button -->
+            </div>
+        </div>
+        <!-- If no Testnet to Show -->
+        {% empty %}
+        <div class="container-fluid bg-light border-all-around-radius my-2">
+            <div class="row my-2">
+                <div class="col-lg-12 col-sm-12 col-md-12 py-3">
+                    <p><i class="fa-solid fa-users-slash fa-2x"></i>There is no Testnet to show...</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% else %}
+    <div class="row padding-10-pourcent-left-right">
+        <div class="col-xl-12 col-md-12">
+            <div class="card shadow h-100 mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">You are not an Admin of the app!</h6>
+                </div>
+                <div class="card-body">
+                    <p class="h5 font-weight-bold text-dark">
+                        You need to be an admin to access this content!
+                    </p>
+                    <br>
+                    <br>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% if searching %}
+    {% include "app/inc/pagination.html" with extra_url_args="searching="|add:searching %}
+{% else %}
+    {% include "app/inc/pagination.html" %}
+{% endif %}
+<br>
+<br>
+<hr>
+<br>
+<br>
+{%endblock%}

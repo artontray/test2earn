@@ -1,0 +1,308 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="mb-0 text-xl font-weight-bold badge-primary border-all-around-radius">
+        {% if searching %}
+            Searching "<i>{{ searching }}</i>"
+        {% else %}
+        All Testnet(s) from : {{ testnet_username }}
+        {% endif %}
+    </h1>
+</div>
+<!-- SEARCH FORM-->
+<form id="searchform" action="#" method="get" accept-charset="utf-8">
+    <div class="row my-2">
+        <div class="col-lg-3 col-sm-12 col-md-3 py-3">
+            <span>
+                <input class="searchfield" id="searchbox" minlength=1 name="searching" type="text" placeholder="Search"
+                    value="{% if searching %}{{ searching }}{% endif %}">
+            </span>
+            <span>
+                <button class="searchbutton" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+        <div class="col-lg-3 col-sm-12 col-md-3 py-3">
+            <span>
+                <a class=" btn btn-primary " href="{% url 'showtestnetall' request.user.username %}">
+                    Show My Testnets
+                </a>
+            </span>
+        </div>
+    </div>
+</form>
+<span><i class="fa-sharp fa-solid fa-circle text-primary"></i> Created by you </span>
+<span><i class="fa-sharp fa-solid fa-circle text-warning"></i> Copied by you </span>
+<span><i class="fa-sharp fa-solid fa-circle text-secondary"></i> Testnet from an other User </span>
+<br>
+<span class="badge badge-primary">Network</span>
+<span class="badge badge-secondary">Category</span>
+<span class="badge badge-success">Testnet, Devnet or Mainnet</span>
+<span class="badge badge-info" >Wallet I</span>
+<span class="badge badge-warning">Wallet II</span>
+
+<!-- Listing of the all testnet created by current user searched or current user on URL-->
+{% for testnet in object_list %}
+<!-- If Testnet Belong to the current User connected-->
+{% if testnet.author == request.user and testnet.testnet_user == request.user %}
+<div class="container-fluid bg-light border-bottom-primary border-all-around-radius my-2">
+    <div class="row my-2">
+        <div class="col-lg-5 col-sm-12 col-md-5 py-3">
+            <h6 class=" font-weight-bold text-primary align-left padding-20px-left">
+                <a href="{% url 'showtestnet' testnet.slug %}" class="no-decoration">
+                    <p class="h5 text-secondary"><i class="fa-solid fa-house text-primary"></i>
+                        {{ testnet.testnet_name }}
+                        <span class="badge badge-primary">{{ testnet.network_name }}</span>
+                        <span class="badge badge-secondary">{{ testnet.category }}</span>
+                        <span class="badge badge-success">{{ testnet.network_status }}</span>
+                        {% if testnet.wallet1_name %}
+                        <span class="badge badge-info">{{ testnet.wallet1_name }}</span>
+                        {% endif %}
+                        {% if testnet.wallet2_name %}
+                        <span class="badge badge-warning">{{ testnet.wallet2_name }}</span>
+                        {% endif %}
+                    </p>
+                </a>
+            </h6>
+        </div>
+        <div class="col-lg-2 col-sm-12 col-md-2 py-3 ">
+            <a href="{% url 'dashboard' testnet.author %}" class=" btn btn-primary btn-user btn-block">
+                <i class="fa-solid fa-user-large"></i> You
+            </a>
+        </div>
+        <div class="col-lg-2 col-sm-12 col-md-2 py-3">
+            {% if testnet.status_testnet == 2 %}
+            <button type="button" class="btn btn-danger btn-user btn-block" disabled>
+                <span><i class="fa-solid fa-circle-exclamation"></i></span>
+                Reported
+            </button>
+            {% else %}
+            <button type="button" class="btn btn-success btn-user btn-block" data-toggle="modal"
+                data-target="#CopyTestnet{{ testnet.id }}">
+                <span><i class="fa-regular fa-copy"></i></span>
+                Copy
+            </button>
+            {% endif %}
+            <div class="modal" id="CopyTestnet{{ testnet.id }}" tabindex="-1"
+                aria-labelledby="CopyTestnetLabel{{ testnet.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h3 text-secondary" id="CopyTestnetLabel{{ testnet.id }}">
+                                <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-4x"></i>
+                            </h5>
+                        </div>
+                        <form method="get" action="{% url 'copy_testnet' slug=testnet.slug_original %}">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <p class="h4 font-weight-bold text-uppercase text-primary align-center">
+                                    Do you want to copy the following Testnet : {{ testnet.testnet_name }} ? 
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success btn-user">
+                                    YES
+                                </button>
+                                <button type="button" class="btn btn-danger btn-user" data-dismiss="modal"
+                                    aria-label="Close">
+                                    NO
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-12 col-md-2 py-3">
+            <a href="{% url 'update_testnet' slug=testnet.slug %}" class=" btn btn-primary btn-user btn-block">
+                <i class="fa-solid  fa-pen-to-square"></i>EDIT
+            </a>
+        </div>
+    </div>
+</div>
+{% elif testnet.testnet_user == request.user and testnet.author != request.user %}
+<div class="container-fluid bg-light border-bottom-warning border-all-around-radius my-2">
+    <div class="row my-2">
+        <div class="col-lg-5 col-sm-12 col-md-5 py-3">
+            <h6 class=" font-weight-bold text-primary align-left padding-20px-left">
+                <a href="{% url 'showtestnet' testnet.slug %}" class="no-decoration">
+                    <p class="h5 text-secondary"><i class="fa-regular fa-copy"></i> {{ testnet.testnet_name }}
+                        <span class="badge badge-primary">{{ testnet.network_name }}</span>
+                        <span class="badge badge-secondary">{{ testnet.category }}</span>
+                        <span class="badge badge-success">{{ testnet.network_status }}</span>
+                        {% if testnet.wallet1_name %}
+                        <span class="badge badge-info">{{ testnet.wallet1_name }}</span>
+                        {% endif %}
+                        {% if testnet.wallet2_name %}
+                        <span class="badge badge-warning">{{ testnet.wallet2_name }}</span>
+                        {% endif %}
+                    </p>
+                </a>
+            </h6>
+        </div>
+        <div class="col-lg-2 col-sm-12 col-md-2 py-3">
+            <a href="{% url 'dashboard' testnet.author %}" class=" btn btn-warning btn-user btn-block">
+                <i class="fa-solid fa-user-large"></i>
+                {% if testnet.author == request.user %}
+                    You
+                {% else %}
+                    {{ testnet.author }}
+                {% endif %}
+            </a>
+        </div>
+        <div class="col-lg-2 col-sm-12 col-md-2 py-3">
+            {% if testnet.status_testnet == 2 %}
+            <button type="button" class="btn btn-danger btn-user btn-block" disabled>
+                <span><i class="fa-solid fa-circle-exclamation"></i></span> 
+                Reported
+            </button>
+            {% else %}
+            <button type="button" class="btn btn-success btn-user btn-block" data-toggle="modal"
+                data-target="#CopyTestnet{{ testnet.id }}">
+                <span><i class="fa-regular fa-copy"></i></span> 
+                Copy
+            </button>
+            {% endif %}
+            <div class="modal" id="CopyTestnet{{ testnet.id }}" tabindex="-1"
+                aria-labelledby="CopyTestnetLabel{{ testnet.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h3 text-secondary" id="CopyTestnetLabel{{ testnet.id }}">
+                                <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-4x"></i>
+
+                            </h5>
+                        </div>
+                        <form method="get" action="{% url 'copy_testnet' slug=testnet.slug_original %}">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <p class="h4 font-weight-bold text-uppercase text-primary align-center">
+                                    Do you want to copy the following Testnet : {{ testnet.testnet_name }} ? 
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success btn-user">
+                                    YES
+                                </button>
+                                <button type="button" class="btn btn-danger btn-user" data-dismiss="modal"
+                                    aria-label="Close">
+                                    NO
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-12 col-md-2 py-3">
+            <a href="{% url 'update_testnet' slug=testnet.slug %}" class=" btn btn-primary btn-user btn-block">
+                <i class="fa-solid  fa-pen-to-square"></i>EDIT
+            </a>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container-fluid bg-light border-bottom-secondary border-all-around-radius my-2">
+    <div class="row my-2">
+        <div class="col-lg-5 col-sm-12 col-md-5 py-3">
+            <h6 class=" font-weight-bold text-primary align-left padding-20px-left">
+                <a href="{% url 'showtestnet' testnet.slug %}" class="no-decoration">
+                    <p class="h5 text-secondary"><i class="fa-solid fa-unlock-keyhole"></i> 
+                        {{ testnet.testnet_name }}
+                        <span class="badge badge-primary">{{ testnet.network_name }}</span>
+                        <span class="badge badge-secondary">{{ testnet.category }}</span>
+                        <span class="badge badge-success">{{ testnet.network_status }}</span>
+                        {% if testnet.wallet1_name %}
+                        <span class="badge badge-info">{{ testnet.wallet1_name }}</span>
+                        {% endif %}
+                        {% if testnet.wallet2_name %}
+                        <span class="badge badge-warning">{{ testnet.wallet2_name }}</span>
+                        {% endif %}
+                    </p>
+                </a>
+            </h6>
+        </div>
+        <div class="col-lg-2 col-sm-12 col-md-2 py-3">
+            <a href="{% url 'dashboard' testnet.author %}" class=" btn btn-secondary btn-user btn-block">
+                <i class="fa-solid fa-user-large"></i>
+                {% if testnet.author == request.user %}
+                    You
+                {% else %}
+                    {{ testnet.author }}
+                {% endif %}
+            </a>
+        </div>
+        <div class="col-lg-2 col-sm-12 col-md-2 py-3">
+            {% if testnet.status_testnet == 2 %}
+            <button type="button" class="btn btn-danger btn-user btn-block" disabled>
+                <span><i class="fa-solid fa-circle-exclamation"></i></span> 
+                Reported
+            </button>
+            {% else %}
+            <button type="button" class="btn btn-success btn-user btn-block" data-toggle="modal"
+                data-target="#CopyTestnet{{ testnet.id }}">
+                <span><i class="fa-regular fa-copy"></i></span> 
+                Copy
+            </button>
+            {% endif %}
+            <div class="modal" id="CopyTestnet{{ testnet.id }}" tabindex="-1"
+                aria-labelledby="CopyTestnetLabel{{ testnet.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h3 text-secondary" id="CopyTestnetLabel{{ testnet.id }}">
+                                <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-4x"></i>
+                            </h5>
+                        </div>
+                        <form method="get" action="{% url 'copy_testnet' slug=testnet.slug_original %}">
+                            {% csrf_token %}
+                            <div class="modal-body">
+                                <p class="h4 font-weight-bold text-uppercase text-primary align-center">
+                                    Do you want to copy the following Testnet : {{ testnet.testnet_name }} ? 
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success btn-user">
+                                    YES
+                                </button>
+                                <button type="button" class="btn btn-danger btn-user" data-dismiss="modal"
+                                    aria-label="Close">
+                                    NO
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-sm-12 col-md-2 py-3">
+            <button href="#" class=" btn btn-primary btn-user btn-block" disabled>
+                <i class="fa-solid  fa-pen-to-square"></i>EDIT
+            </button>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% empty %}
+<!-- If no testnet to show-->
+<div class="container-fluid bg-light border-all-around-radius my-2">
+    <div class="row my-2">
+        <div class="col-lg-12 col-sm-12 col-md-12 py-3">
+            <p><i class="fa-solid fa-users-slash fa-2x"></i>There is no Testnet to show...</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<!-- If searching we keep it on URL for pagination-->
+{% if searching %}
+    {% include "app/inc/pagination.html" with extra_url_args="searching="|add:searching %}
+{% else %}
+    {% include "app/inc/pagination.html" %}
+{% endif %}
+<!-- End Listing-->
+<br><br><hr><br><br>
+{%endblock%}

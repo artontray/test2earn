@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="mb-0 text-xl font-weight-bold badge-success border-all-around-radius">EDIT YOUR PROFILE</h1>
+</div>
+<div class="container-fluid">
+  <form action="" method="post" enctype="multipart/form-data">
+    <div class="row padding-10-pourcent-left-right">
+      <div class="col-xl-12 col-md-12 py-3">
+        <div class="card shadow h-100 mb-4">
+          <div class="card-header py-3">
+            <h6 class="h3 font-weight-bold text-primary">User Info(s)</h6>
+          </div>
+          <div class="card-body">
+            {% csrf_token %}
+            <!-- Building the UserInfo Model Form  -->
+            <div class="form-row">
+              {% include 'app/inc/formfield.html' with field=form.bio icone='fa-solid fa-pen' %}
+            </div>
+            <div class="form-group">
+              {% include 'app/inc/formfield.html' with field=form.debank icone='fa-solid fa-link' %}
+            </div>
+            <div class="form-group align-center py-3">
+              {% load cloudinary %}      
+              {% cloudinary request.user.user_info.avatar.url format="jpg" width=300 height=300 class="border-all-around-radius" crop="fill" %}
+            </div>
+              <div class="form-group align-center py-3">
+              {% include 'app/inc/formfield.html' with field=form.avatar icone='fa-solid fa-user-plus' %}
+            </div>
+            <div class="row padding-10-pourcent-left-right">
+              <div class="col-xl-6 col-md-6 py-3">
+                  <a class=" btn btn-secondary btn-user btn-block" href="{% url 'dashboard' %}">CANCEL</a>
+              </div>
+              <div class="col-xl-6 col-md-6 py-3">
+                <button type="submit" class="btn btn-success btn-block ">SAVE MY PROFILE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<br><br><hr><br><br>
+{%endblock%}

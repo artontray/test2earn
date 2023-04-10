@@ -1,0 +1,562 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="mb-0 text-xl font-weight-bold badge-primary border-all-around-radius">Testnet Information(s)</h1>
+</div>
+<!-- Testnet Information Page -->
+<div class="row padding-10-pourcent-left-right">
+    <div class="col-xl-12 col-md-12">
+        <div class="card shadow h-100 mb-4">
+            <div class="card-header py-3">
+                <h6 class="h3 m-0 font-weight-bold text-primary">Testnet by <code>{{ object.author }}</code> :
+                    {{ object.testnet_name }} <br> created <code>{{ object.created_on|date }}</code> with last update made <code>{{ object.updated_on|date }}</code> </h6>
+                    {% if testnet.status_testnet == 2  %}<p class="text-danger">(THIS TESTNET IS REPORTED) - copy and Edition not available. Do not click on any links of this Testnet until an Admin review it</p>{% endif %}
+            </div>
+            <div class="card-body">
+                <div class="row my-2">
+                    <div class="col-xl-3 col-sm-12 col-md-6 py-3">
+                        <p class="h5 font-weight-bold text-primary">
+                            Network 
+                        </p>
+                        <p>
+                            {{ object.network_name }}
+                        </p>
+                    </div>
+                    <div class="col-xl-3 col-sm-12 col-md-6 py-3">
+                        <p class="h5 font-weight-bold text-primary">
+                            Status 
+                        </p>
+                        <p>
+                            {{ object.network_status }}
+                        </p>
+                    </div>
+                    <div class="col-xl-3 col-sm-12 col-md-6 py-3">
+                        <p class="h5 font-weight-bold text-primary">
+                            Category 
+                        </p>
+                        <p>
+                            {{ object.category }}
+                        </p>
+                    </div>
+                    {% if object.website %}
+                    <div class="col-xl-3 col-sm-12 col-md-6 py-3">
+                        <p class="h5 font-weight-bold text-primary">
+                            Website 
+                        </p>
+                        <p>
+                            <a href="{{ object.website }}" target="_blank"><i class="fa-solid fa-link"></i></a>
+                        </p>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="row my-2">
+                        {% if object.twitter %}
+                        <div class="col-xl-3 col-sm-12 col-md-6 py-3">
+                            <a href="{{ object.twitter }}" target="_blank" alt="Twitter link">
+                                <i class="fa-brands fa-twitter fa-4x text-primary"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if object.facebook %}
+                        <div class="col-xl-3 col-sm-12 col-md-6 py-3">
+                            <a href="{{ object.facebook }}" target="_blank" alt="Facebook link">
+                                <i class="fa-brands fa-facebook fa-4x text-primary"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if object.github %}
+                        <div class="col-xl-3 col-sm-12 col-md-6 py-3">
+                            <a href="{{ object.github }}" target="_blank" alt="Github link">
+                                <i class="fa-brands fa-github fa-4x text-primary"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                        {% if object.discord %}
+                        <div class="col-xl-3 col-sm-12 col-md-6 py-3">
+                            <a href="{{ object.discord }}" target="_blank" alt="Discord link">
+                                <i class="fa-brands fa-discord fa-4x text-primary"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                </div>
+                <div class="row my-2">
+                    {% if object.telegram %}
+                        <div class="col-xl-3 col-sm-12 col-md-6 py-3">
+                            <a href="{{ object.telegram }}" target="_blank" alt="Telegram link">
+                                <i class="fa-brands fa-telegram fa-4x text-primary"></i>
+                            </a>
+                        </div>
+                    {% endif %}
+                    {% if object.instagram %}
+                        <div class="col-xl-3 col-sm-12 col-md-6 py-3">
+                            <a href="{{ object.instagram }}" target="_blank" alt="Instagram link">
+                                <i class="fa-brands fa-instagram fa-4x text-primary"></i>
+                            </a>
+                        </div>
+                    {% endif %}
+                    {% if object.youtube %}
+                        <div class="col-xl-3 col-sm-12 col-md-6 py-3">
+                            <a href="{{ object.youtube }}" target="_blank" alt="Youtube link">
+                                <i class="fa-brands fa-youtube fa-4x text-primary"></i>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="row my-2">
+                    {% if object.whitepaper %}
+                        <div class="col-xl-6 col-sm-12 col-md-6 py-3">
+                            <p class="h5 font-weight-bold text-primary">
+                                Whitepaper 
+                            </p>
+                                <a href="{{ object.whitepaper }}" target="_blank" alt="Whitepaper link">
+                                    Click here
+                                </a>
+                        </div>
+                    {% endif %}
+                    {% if object.browser %}
+                        <div class="col-xl-6 col-sm-12 col-md-6 py-3">
+                            <p class="h5 font-weight-bold text-primary">
+                                Browser  
+                            </p>
+                            {{ object.browser }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="row my-2">
+                    {% if object.wallet1_name %}
+                        <div class="col-xl-6 col-sm-12 col-md-6 py-3">
+                            <p class="h5 font-weight-bold text-primary">
+                                Wallet I  
+                            </p>
+                            {% if object.wallet1_link and object.wallet1_name %}
+                            <p>
+                                <a href="{{ object.wallet1_link }}" target="_blank" alt="wallet1 link">
+                                    {{ object.wallet1_name }}
+                                </a>
+                            </p>
+                            {% else %}
+                            <p>
+                                {{ object.wallet1_name }}
+                            </p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    {% if object.wallet1_type %}
+                        <div class="col-xl-6 col-sm-12 col-md-6 py-3">
+                            <p class="h5 font-weight-bold text-primary">
+                                Type 
+                            </p>
+                            {{ object.wallet1_type }}
+                        </div>
+                    {% endif %}
+                    {% if object.wallet2_name %}
+                        <div class="col-xl-6 col-sm-12 col-md-6 py-3">
+                            <p class="h5 font-weight-bold text-primary">
+                                Wallet II
+                            </p>
+                            {% if object.wallet2_link and object.wallet2_name %}
+                            <p>
+                                <a href="{{ object.wallet2_link }}" target="_blank" alt="wallet2 link">
+                                    {{ object.wallet2_name }}
+                                </a>
+                            </p>
+                            {% else %}
+                            <p>
+                                {{ object.wallet2_name }}
+                            </p>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    {% if object.wallet2_type %}
+                        <div class="col-xl-6 col-sm-12 col-md-6 py-3">
+                            <p class="h5 font-weight-bold text-primary">
+                                Type 
+                            </p>
+                            {{ object.wallet2_type }}
+                        </div>
+                    {% endif %}
+                </div>
+                <br><br><hr><br>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row padding-10-pourcent-left-right">
+    <div class="col-xl-12 col-md-12">
+        <div class="card shadow h-100 mb-4">
+            <div class="card-header py-3">
+                <h6 class="h3 m-0 font-weight-bold text-primary">Tasks Description</h6>
+            </div>
+            <div class="card-body">
+                <div class="row my-2">
+                    <div class="col-xl-12 col-sm-12 col-md-12 ">
+                        <p>
+                            {{ object.tasks_description|linebreaks }}
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <br><hr><br>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row padding-10-pourcent-left-right">
+    <div class="col-xl-6 col-sm-12 col-md-12 py-3">
+        {% if testnet.testnet_user == request.user  %}
+        <!--A testnet owner cannot report a testnet created by himself-->
+            <button href="#" class=" btn btn-danger btn-user btn-block" disabled>
+                REPORT
+            </button> 
+        {% else %}
+            {% if testnet.status_testnet == 2 and request.user.user_info.status == 1 %}
+                <!--Testnet is reported and admin is connected, available for cancel report-->
+                <button type="button" class="btn btn-danger btn-user btn-block" data-toggle="modal" data-target="#CancelReportTestnet{{ testnet.id }}">
+                    CANCEL REPORT
+                </button>
+                <div class="modal" id="CancelReportTestnet{{ testnet.id }}" tabindex="-1" aria-labelledby="CancelReportTestnetLabel{{ testnet.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title h3 text-secondary" id="CancelReportTestnetLabel{{ testnet.id }}">
+                                    <i class="fa-sharp fa-solid fa-circle-exclamation text-danger fa-4x"></i>
+                                </h5>
+                            </div>
+                            <form method="get" action="{% url 'report_testnet' slug=testnet.slug_original %}">
+                                {% csrf_token %}
+                                <div class="modal-body">
+                                    <p class="h4 font-weight-bold text-uppercase text-primary align-center">
+                                        Do you really want to cancel the report for this Testnet  : {{ testnet.testnet_name }} ?
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success btn-user">
+                                        YES
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-user" data-dismiss="modal" aria-label="Close">
+                                        NO
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+            <!--A testnet is reported or not, Report Button Available -->
+                <button type="button" class="btn btn-danger btn-user btn-block" data-toggle="modal" data-target="#ReportTestnet{{ testnet.id }}">
+                    REPORT
+                </button>
+                <div class="modal" id="ReportTestnet{{ testnet.id }}" tabindex="-1" aria-labelledby="ReportTestnetLabel{{ testnet.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title h3 text-secondary" id="ReportTestnetLabel{{ testnet.id }}">
+                                    <i class="fa-sharp fa-solid fa-circle-exclamation text-danger fa-4x"></i>
+                                </h5>
+                            </div>
+                            <form method="get" action="{% url 'report_testnet' slug=testnet.slug_original %}">
+                                {% csrf_token %}
+                                <div class="modal-body">
+                                    <p class="h4 font-weight-bold text-uppercase text-primary align-center">
+                                        Do you really want to report this Testnet  : {{ testnet.testnet_name }} ?
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-success btn-user">
+                                        YES
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-user" data-dismiss="modal" aria-label="Close">
+                                        NO
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div class="col-xl-6 col-sm-12 col-md-12 py-3">
+        {% if testnet.status_testnet == 2 %}
+        <!--A reported Testnet cannot be copied anymore until admin cancel the report-->
+            <button type="button" class="btn btn-danger btn-user btn-block" disabled>
+                <span><i class="fa-solid fa-circle-exclamation"></i></span>
+                Copy not available
+            </button>
+        {% else %}
+            <a href="{% url 'copy_testnet' slug=object.slug_original %}" class=" btn btn-success btn-user btn-block">
+                Copy
+            </a>
+        {% endif %}
+    </div>
+</div>
+<!--If the logged user is the testnet_user of this testnet, it will have access to his information for this testnet-->
+{% if testnet.testnet_user == request.user  %}
+    <div class="row padding-10-pourcent-left-right">
+        <div class="col-xl-12 col-md-12">
+            <div class="card shadow h-100 mb-4">
+                <div class="card-header py-3">
+                    <h6 class="h3 m-0 font-weight-bold text-success">Information(s) User</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row my-2">
+                        <div class="col-xl-6 col-sm-12 col-md-12 ">
+                            <p class="h5 font-weight-bold text-success">
+                                Your Email :
+                            </p>
+                            <p>
+                                {{ object.email_user }}
+                            </p>
+                        </div>
+                        {% if object.website_user %}
+                        <div class="col-xl-6 col-sm-12 col-md-12 ">
+                            <p class="h5 font-weight-bold text-success">
+                                Link information Testnet :
+                            </p>
+                            <a href="{{ object.website_user }}" target="_blank" alt="webiste user link">
+                                Click here
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="row my-2">
+                        {% if object.twitter_user %}
+                            <div class="col-xl-3 col-sm-12 col-md-6 ">
+                                <p><i class="fa-brands fa-twitter fa-4x text-success"></i></p>
+                                <p>
+                                    <a href="https://twitter.com/{{ object.twitter_user }}" target="_blank" class="h6 text-success" alt="Twitter User link">
+                                    {{ object.twitter_user }} 
+                                    </a>
+                                </p>
+                            </div>
+                        {% endif %}
+                        {% if object.telegram_user %}
+                            <div class="col-xl-3 col-sm-12 col-md-6 ">
+                                <p><i class="fa-brands fa-telegram fa-4x text-success"></i></p>
+                                <p class="h6 text-success">
+                                    {{ object.telegram_user }} 
+                                </p>
+                            </div>
+                        {% endif %}
+                        {% if object.github_user %}
+                            <div class="col-xl-3 col-sm-12 col-md-6 ">
+                                <p><i class="fa-brands fa-github fa-4x text-success"></i></p>
+                                <p>
+                                    <a href="https://github.com/{{ object.github_user }}" target="_blank" class="h6 text-success" alt="Github User link">
+                                        {{ object.github_user }} 
+                                    </a> 
+                                </p>
+                            </div>
+                        {% endif %}
+                        {% if object.discord_user %}
+                            <div class="col-xl-3 col-sm-12 col-md-6 ">
+                                <p><i class="fa-brands fa-discord fa-4x text-success"></i></p>
+                                <p class="h6 text-success">
+                                    {{ object.discord_user }} 
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <!--Wallet I-->
+                    <div class="row my-2">
+                        <div class="col-xl-6 col-sm-12 col-md-12 py-3">
+                            <hr>
+                            <p class="h5 font-weight-bold text-dark">
+                                Wallet I :
+                            </p>
+                            
+                                {% if object.wallet1_link and object.wallet1_name %}
+                                <p>
+                                    <a href="{{ object.wallet1_link }}" target="_blank" alt="wallet1 link">
+                                        {{ object.wallet1_name }}
+                                    </a>
+                                </p>
+                                {% else %}
+                                <p>
+                                    {{ object.wallet1_name }}
+                                </p>
+                                {% endif %}
+                            
+                            <p class="h5 font-weight-bold text-dark">
+                                Type :
+                            </p>
+                            <p>
+                                {{ object.wallet1_type }}
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Adress :
+                            </p>
+                            <p>
+                                {{ object.wallet1_adress }}
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Seed :
+                            </p>
+                            <p>
+                                {{ object.wallet1_seed }}
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Private Key :
+                            </p>
+                            <p>
+                                {{ object.wallet1_priv_key }}
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Wallet I Clue :
+                            </p>
+                            <p>
+                                <i>{{ object.wallet1_clue }}</i>
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Wallet I Password :
+                            </p>
+                            <p>
+                                {{ object.wallet1_password }}
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Wallet I Session:
+                            </p>
+                            <p>
+                                {{ object.wallet1_session }}
+                            </p>
+                        </div>
+                        <!--Wallet II-->
+                        {% if object.wallet2_name %}
+                        <div class="col-xl-6 col-sm-12 col-md-12 py-3">
+                            <hr>
+                            <p class="h5 font-weight-bold text-dark">
+                                Wallet II :
+                            </p>
+                            <p>
+                                <a href="{{ object.wallet2_link }}" target="_blank" alt="wallet2 link">
+                                    {{ object.wallet2_name }}
+                                </a>
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Type :
+                            </p>
+                            <p>
+                                {{ object.wallet2_type }}
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Adress :
+                            </p>
+                            <p>
+                                {{ object.wallet2_adress }}
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Seed :
+                            </p>
+                            <p>
+                                {{ object.wallet2_seed }}
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Private Key :
+                            </p>
+                            <p>
+                                {{ object.wallet2_priv_key }}
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Wallet II Clue :
+                            </p>
+                            <p>
+                                <i>{{ object.wallet2_clue }}</i>
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Wallet II Password :
+                            </p>
+                            <p>
+                                {{ object.wallet2_password }}
+                            </p>
+                            <p class="h5 font-weight-bold text-dark">
+                                Wallet II Session:
+                            </p>
+                            <p>
+                                {{ object.wallet2_session }}
+                            </p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <br><hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row padding-10-pourcent-left-right">
+        <div class="col-xl-12 col-md-12">
+            <div class="card shadow h-100 mb-4">
+                <div class="card-header py-3">
+                    <h6 class="h3 m-0 font-weight-bold text-primary">All Your Data About this testnet</h6>
+                    <p class="h6 text-primary"><i>Write here all the feedbacks you got from the testnet, transactions links, new RPC data, token adress, bash code etc...</i></p>
+                </div>
+                <div class="card-body">
+                    <div class="row my-2">
+                        <div class="col-xl-12 col-sm-12 col-md-12 ">
+                            <p> 
+                                {{ object.tasks_results|linebreaks }}
+                                
+                            </p>
+                        </div>
+                    </div>
+                    <br><br><hr><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row padding-10-pourcent-left-right">
+        <div class="col-xl-6 col-sm-12 col-md-12 py-3">
+            <button type="button" class="btn btn-danger btn-user btn-block" data-toggle="modal" data-target="#DeleteTestnet{{ testnet.id }}">
+                <span>
+                    <i class="fa-regular fa-copy"></i>
+                </span>
+                Delete
+            </button>
+            <div class="modal" id="DeleteTestnet{{ testnet.id }}" tabindex="-1" aria-labelledby="DeleteTestnetLabel{{ testnet.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title h3 text-secondary" id="DeleteTestnetLabel{{ testnet.id }}">
+                                <i class="fa-sharp fa-solid fa-circle-exclamation text-danger fa-4x"></i>
+                            </h5>
+                        </div>
+                        <form method="get" action="{% url 'delete_testnet' slug=object.slug %}">
+                        {% csrf_token %}
+                            <div class="modal-body">
+                                <p class="h4 font-weight-bold text-uppercase text-primary align-center">
+                                    Do you want to delete this Testnet  : <code>{{ testnet.testnet_name }}</code> ? 
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success btn-user">
+                                    YES
+                                </button>
+                                <button type="button" class="btn btn-danger btn-user" data-dismiss="modal" aria-label="Close">
+                                    NO
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-sm-12 col-md-12 py-3">
+            {% if testnet.status_testnet == 2  %}
+            <!-- The Testnet have been reported, editing not permitted-->
+            <button class=" btn btn-info btn-user btn-block" disabled>
+                Editing not available
+            </button>
+            {% else %}
+            <a href="{% url 'update_testnet' slug=object.slug %}" class=" btn btn-primary btn-user btn-block">
+                Edit
+            </a>
+            {% endif  %}
+        </div>
+    </div>
+{% endif %}
+<!-- End of this Testnet Information -->
+<br><br><hr><br><br>
+{%endblock%}
