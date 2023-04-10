@@ -3,7 +3,7 @@
 {% block content %}
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="mb-0 text-xl font-weight-bold badge-primary border-all-around-radius">Dashboard - {{ object.username }} -</h1>
+    <h3 class="mb-0 text-xl font-weight-bold badge-primary border-all-around-radius">Dashboard</h3>
 </div>
 
 
@@ -15,18 +15,18 @@
     <!-- 4 Boxes with informations about the user interaction with the app -->
     <!-- Box 1 -->
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-bottom-success shadow h-100 py-2">
+        <div class="card border-bottom-success shadow h-75 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="h5 font-weight-bold text-success text-uppercase mb-1">
+                        <div class="h6 text-success  mb-1">
                             Testnets
                         </div>
-                        <div class="h1_extra_big mb-0 font-weight-bold text-gray-800">{{ object.user_info.nb_testnet }}</div>
+                        <div class="h1_extra_big mb-0 text-gray-800">{{ object.user_info.nb_testnet }}</div>
                     </div>
                     <div class="col-auto">
                         <div class="sidebar-brand-icon rotate-n-15">
-                            <i class="fas fa-laugh-wink fa-4x text-success"></i>
+                            <i class="fas fa-laugh-wink fa-3x text-success"></i>
                         </div>
                     </div>
                 </div>
@@ -35,20 +35,19 @@
     </div>
     <!-- Box 2 -->
     <div class="col-xl-3 col-md-6 mb-4 ">
-        <div class="card border-bottom-primary shadow h-100 py-2">
+        <div class="card border-bottom-primary shadow h-75 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center ">
                     <div class="col mr-2">
-                        <div class="h5 font-weight-bold text-primary text-uppercase mb-1 ">
-                            Following
-                        </div>
-                        <div class="h1_extra_big mb-0 font-weight-bold text-gray-800">{{ object.user_info.nb_following }}</div>
-                    </div>
-                    <div class="col mr-2">
-                        <div class="h5 font-weight-bold text-primary text-uppercase mb-1 ">
+                        <div class="h6 text-primary mb-1 ">
                             Followers
                         </div>
-                        <div class="h1_extra_big mb-0 font-weight-bold text-gray-800">{{ object.user_info.nb_followers }}</div>
+                        <div class="h1_extra_big mb-0 text-gray-800">{{ object.user_info.nb_followers }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="sidebar-brand-icon rotate-n-15">
+                            <i class="fa-sharp fa-solid fa-users fa-3x text-primary"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,21 +55,24 @@
     </div>
     <!-- Box 3 -->
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-bottom-info shadow h-100 py-2">
+        <div class="card border-bottom-info shadow h-75 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="h5 font-weight-bold text-info text-uppercase mb-1">
-                            Copied Testnets
+                        <div class="h6 font-weight-bold text-info mb-1">
+                            Copied
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
-                                <div class="h1_extra_big mb-0 mr-3 font-weight-bold text-gray-800">{{ object.user_info.nb_copied_testnet }}</div>
+                                <div class="h1_extra_big mb-0 mr-3 text-gray-800">{{ object.user_info.nb_copied_testnet }}</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-auto">
-                        <i class="fa-sharp fa-solid fa-clone text-info fa-4x"></i>
+                        <div class="sidebar-brand-icon rotate-n-15">
+                            <i class="fa-sharp fa-solid fa-clone text-info fa-3x"></i>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -78,17 +80,20 @@
     </div>
     <!-- Box 4 -->
     <div class="col-xl-3 col-md-6 mb-4">
-        <div class="card border-bottom-secondary shadow h-100 py-2">
+        <div class="card border-bottom-secondary shadow h-75 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="h5 font-weight-bold text-secondary text-uppercase mb-1">
+                        <div class="h6 font-weight-bold text-secondary mb-1">
                             Notification(s)
                         </div>
-                        <div class="h1_extra_big mb-0 font-weight-bold text-gray-800">{{ object.user_info.nb_notifications }}</div>
+                        <div class="h1_extra_big mb-0 text-gray-800">{{ object.user_info.nb_notifications }}</div>
                     </div>
                     <div class="col-auto">
-                        <i class="fa-solid fa-comment fa-4x text-secondary"></i>
+                        <div class="sidebar-brand-icon rotate-n-15">
+                            <i class="fa-solid fa-comment fa-3x text-secondary"></i>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="container-fluid my-2">

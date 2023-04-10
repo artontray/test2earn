@@ -25,17 +25,17 @@
 }
 /*----------------------------------------Colors-----*/
 :root {
-    --color-primary: #E0F1FF;
-    --color-secondary: #3ca7ff;
+    --color-primary: #000;
+    --color-secondary: #000;
     
     --color-white: #FFF;
     --color-black: #000;
-    --color-main-1: #C7E5FF;
-    --color-main-2: #CBDAFF;
-    --color-main-3: #97CFFF;
-    --color-main-4: #7AC1FF;
-    --color-main-5: #5FB4FF;
-    --color-main-6: hsl(240, 50%, 70%);
+    --color-main-1: #000;
+    --color-main-2: #000;
+    --color-main-3: #000;
+    --color-main-4: #000;
+    --color-main-5: #000;
+    --color-main-6: #000;
  
   }
 /*----------------------------------------Borders-----*/
