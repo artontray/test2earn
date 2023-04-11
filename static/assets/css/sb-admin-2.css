@@ -29,6 +29,9 @@
   --primary-btn-shadow-hover: #c4c4c4;
   --primary-badge-text: #6a6a6a;
   --primary-badge-bg: #e0e0e0;
+  --color-bg-primary: #2f2f2f;
+  --color-bg-primary-hover: #000000;
+  --color-badge-primary-text: #000000;
   --card-header-bg: #2a2a2a;
   --card-header-border-bottom: #cdcdcd;
   --color-alert-info-border: #cdcdcd;
@@ -36,6 +39,7 @@
   --color-alert-info: #ababab;
   --text-black: #000;
   
+  --color-text-secondary: #000;
   --color-black: #000;
   --color-main-1: #000;
   --color-main-2: #000;
@@ -6448,13 +6452,14 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #4e73df !important;
+  background-color: var(--color-bg-primary) !important;
+  color: var(--color-badge-primary-text) !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-  background-color: #2653d4 !important;
+  background-color: var(--color-bg-primary-hover) !important;
 }
 
 .bg-secondary {
@@ -9637,7 +9642,7 @@ a.text-primary:hover, a.text-primary:focus {
 }
 
 .text-secondary {
-  color: #858796 !important;
+  color: var(--color-text-secondary) !important;
 }
 
 a.text-secondary:hover, a.text-secondary:focus {

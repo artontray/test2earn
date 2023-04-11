@@ -60,7 +60,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="h4 font-weight-bold text-primary mb-1">
-                            Copied
+                            Copying
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
@@ -181,10 +181,10 @@
                     {% if object.user_info.last_testnet == "Not created yet" %}
                     <p class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">Last Testnet : "Not created yet"</p>
                     {% else %}
-                    <p>My Last Created Testnet :
+                    <p>Last Testnet :
                         <a href="{% url 'showtestnet' object.user_info.last_testnet_slug %}"
                             class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i>
+                            <i class="fas fa-download fa-sm text-secondary"></i>
                             {{ object.user_info.last_testnet }}
                         </a>
                     </p>
@@ -319,12 +319,12 @@
     </div>
 </div>
 {% for testnet in object.user_info.show_testnet_user %}
-<div class="container-fluid bg-light border-all-around-radius my-2">
+<div class="container-fluid bg-primary border-all-around-radius my-2">
     <div class="row my-2">
         <div class="col-lg-10 col-sm-12 col-md-10 py-3">
             <h6 class=" font-weight-bold text-primary align-left padding-20px-left">
                 <a href="{% url 'showtestnet' testnet.slug %}" class="no-decoration">
-                    <p class="h5 text-secondary"><i class="fa-solid fa-house text-primary"></i>
+                    <p class="h5 text-primary"><i class="fa-solid fa-house text-primary"></i>
                         {{ testnet.testnet_name }}
                         <span class="badge badge-danger">Copied : X {{ testnet.copied_nb }}</span>
                         <span class="badge badge-primary">{{ testnet.network_name }}</span>
@@ -341,7 +341,7 @@
             </h6>
         </div>
         <div class="col-lg-2 col-sm-12 col-md-2 py-3">
-            <a href="{% url 'showtestnet' testnet.slug %}" class=" btn btn-info btn-user btn-block">
+            <a href="{% url 'showtestnet' testnet.slug %}" class=" btn btn-primary btn-user btn-block">
                 <i class="fa-solid fa-eye"></i>
                 Show
             </a>

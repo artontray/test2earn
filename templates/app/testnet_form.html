@@ -56,26 +56,26 @@
       <div class="col-xl-6 col-md-12 py-3">
         <div class="card shadow h-100 mb-4">
           <div class="card-header py-3">
-            <h6 class="h3 font-weight-bold text-success">Your Info(s)</h6>
+            <h6 class="h3 font-weight-bold text-primary">Your Info(s)</h6>
           </div>
           <div class="card-body ">
             <div class="form-group">
-              {% include 'app/inc/formfield.html' with field=form.email_user icone='fa-solid fa-at' color='text-success'%}
+              {% include 'app/inc/formfield.html' with field=form.email_user icone='fa-solid fa-at' color='text-primary'%}
             </div>
             <div class="form-group">
-              {% include 'app/inc/formfield.html' with field=form.twitter_user icone='fa-brands fa-twitter' color='text-success' %}
+              {% include 'app/inc/formfield.html' with field=form.twitter_user icone='fa-brands fa-twitter' color='text-primary' %}
             </div>
             <div class="form-group">
-              {% include 'app/inc/formfield.html' with field=form.discord_user icone='fa-brands fa-discord' color='text-success' %}
+              {% include 'app/inc/formfield.html' with field=form.discord_user icone='fa-brands fa-discord' color='text-primary' %}
             </div>
             <div class="form-group">
-              {% include 'app/inc/formfield.html' with field=form.github_user icone='fa-brands fa-github' color='text-success' %}
+              {% include 'app/inc/formfield.html' with field=form.github_user icone='fa-brands fa-github' color='text-primary' %}
             </div>
             <div class="form-group">
-              {% include 'app/inc/formfield.html' with field=form.telegram_user icone='fa-brands fa-telegram' color='text-success' %}
+              {% include 'app/inc/formfield.html' with field=form.telegram_user icone='fa-brands fa-telegram' color='text-primary' %}
             </div>
             <div class="form-group">
-              {% include 'app/inc/formfield.html' with field=form.website_user icone='fa-brands fa-sistrix' color='text-success' %}
+              {% include 'app/inc/formfield.html' with field=form.website_user icone='fa-brands fa-sistrix' color='text-primary' %}
             </div>
             <div class="row">
               <div class="col mb-2 ">
@@ -106,35 +106,22 @@
       <div class="col-xl-6 col-md-12 py-3">
         <div class="card shadow h-100 mb-4">
           <div class="card-header py-3">
-            <h6 class="h3 font-weight-bold text-info">Wallet 1 </h6>
+            <h6 class="h3 font-weight-bold text-primary">Wallet 1 </h6>
           </div>
           <div class="card-body">
             <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet1_name icone='fa-solid fa-wallet' color='text-info' cols='col-md-6' %}
-              {% include 'app/inc/formfield.html' with field=form.wallet1_type icone='fa-solid fa-desktop' color='text-info' cols='col-md-6' %}
+              {% include 'app/inc/formfield.html' with field=form.wallet1_name icone='fa-solid fa-wallet' color='text-primary' cols='col-md-6' %}
+              {% include 'app/inc/formfield.html' with field=form.wallet1_type icone='fa-solid fa-desktop' color='text-primary' cols='col-md-6' %}
             </div>
             <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet1_adress icone='fa-regular fa-address-book' color='text-info' cols='col-md-12'%}
+              {% include 'app/inc/formfield.html' with field=form.wallet1_adress icone='fa-regular fa-address-book' color='text-primary' cols='col-md-12'%}
             </div>
+
+
+          
             <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet1_priv_key icone='fas fa-exclamation-triangle' color='text-danger' cols='col-md-12'%}
-            </div>
-            <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet1_seed icone='fas fa-exclamation-triangle' color='text-danger' cols='col-md-12'%}
-            </div>
-            <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet1_clue icone='fa-solid fa-puzzle-piece' color='text-info' cols='col-md-12'%}
-            </div>
-            <p class="mb-0 small">Note: <i>If you decide to save your private key or seed
-                phrase here, we advise you not writing the entire key. You
-                can use the Clue input to write something that only you can understand!
-                Example : the First Private Key's letter is the last letter of my dog's name
-              </i>
-            </p>
-            <br>
-            <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet1_password icone='fa-solid fa-wallet' color='text-info' cols='col-md-6'%}
-              {% include 'app/inc/formfield.html' with field=form.wallet1_session icone='fa-solid fa-display' color='text-info' cols='col-md-6'%}
+              {% include 'app/inc/formfield.html' with field=form.wallet1_password icone='fa-solid fa-wallet' color='text-primary' cols='col-md-6'%}
+              {% include 'app/inc/formfield.html' with field=form.wallet1_session icone='fa-solid fa-display' color='text-primary' cols='col-md-6'%}
             </div>
             <p class="mb-0 small">Note: <i>Brave can create different session for you to connect
                 different wallet in the same session. We advise you to use this tool to keep tracks of
@@ -142,7 +129,7 @@
             </p>
             <br>
             <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet1_link icone='fa-regular fa-address-book' color='text-info' cols='col-md-12'%}
+              {% include 'app/inc/formfield.html' with field=form.wallet1_link icone='fa-regular fa-address-book' color='text-primary' cols='col-md-12'%}
             </div>
           </div>
         </div>
@@ -151,36 +138,21 @@
       <div class="col-xl-6 col-md-12 py-3">
         <div class="card shadow h-100 mb-4">
           <div class="card-header py-3">
-            <h6 class="h3 font-weight-bold text-secondary"> Wallet 2 (Optional) </h6>
+            <h6 class="h3 font-weight-bold text-primary"> Wallet 2 (Optional) </h6>
           </div>
           <div class="card-body">
             <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet2_name icone='fa-solid fa-wallet' color='text-secondary' cols='col-md-6'%}
-              {% include 'app/inc/formfield.html' with field=form.wallet2_type icone='fa-solid fa-desktop' color='text-secondary' cols='col-md-6'%}
+              {% include 'app/inc/formfield.html' with field=form.wallet2_name icone='fa-solid fa-wallet' color='text-primary' cols='col-md-6'%}
+              {% include 'app/inc/formfield.html' with field=form.wallet2_type icone='fa-solid fa-desktop' color='text-primary' cols='col-md-6'%}
             </div>
             <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet2_adress icone='fa-regular fa-address-book' color='text-secondary' cols='col-md-12'%}
+              {% include 'app/inc/formfield.html' with field=form.wallet2_adress icone='fa-regular fa-address-book' color='text-primary' cols='col-md-12'%}
             </div>
-            <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet2_priv_key icone='fas fa-exclamation-triangle' color='text-danger' cols='col-md-12'%}
-            </div>
-            <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet2_seed icone='fas fa-exclamation-triangle' color='text-danger' cols='col-md-12'%}
-            </div>
-            <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet2_clue icone='fa-solid fa-puzzle-piece' color='text-secondary' cols='col-md-12'%}
-            </div>
-            <p class="mb-0 small">Note: <i>If you decide to save your private key or seed
-                phrase here, we advise you not writing the entire key. You
-                can use the Clue input to write something that only you can understand!
-                Example : the First Private Key's letter is the last letter of my dog's name
-              </i>
-            </p>
-            <br>
-            <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet2_password icone='fa-solid fa-wallet' color='text-secondary' cols='col-md-6'%}
 
-              {% include 'app/inc/formfield.html' with field=form.wallet2_session icone='fa-solid fa-display' color='text-secondary' cols='col-md-6'%}
+            <div class="form-row">
+              {% include 'app/inc/formfield.html' with field=form.wallet2_password icone='fa-solid fa-wallet' color='text-primary' cols='col-md-6'%}
+
+              {% include 'app/inc/formfield.html' with field=form.wallet2_session icone='fa-solid fa-display' color='text-primary' cols='col-md-6'%}
             </div>
             <p class="mb-0 small">Note: <i>Brave can create different session for you to connect
                 different wallet in the same session. We advise you to use this tool to keep tracks of
@@ -188,7 +160,7 @@
             </p>
             <br>
             <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.wallet2_link icone='fa-regular fa-address-book' color='text-secondary' cols='col-md-12'%}
+              {% include 'app/inc/formfield.html' with field=form.wallet2_link icone='fa-regular fa-address-book' color='text-primary' cols='col-md-12'%}
             </div>
           </div>
         </div>
@@ -202,7 +174,7 @@
           </div>
           <div class="card-body">
             <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.tasks_description icone='fa-regular fa-address-book' color='text-info' cols='col-md-12'%}
+              {% include 'app/inc/formfield.html' with field=form.tasks_description icone='fa-regular fa-address-book' color='text-primary' cols='col-md-12'%}
             </div>
           </div>
         </div>
@@ -214,29 +186,28 @@
           </div>
           <div class="card-body">
             <div class="form-row">
-              {% include 'app/inc/formfield.html' with field=form.tasks_results icone='fa-regular fa-address-book' color='text-info' cols='col-md-12'%}
+              {% include 'app/inc/formfield.html' with field=form.tasks_results icone='fa-regular fa-address-book' color='text-primary' cols='col-md-12'%}
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row padding-10-pourcent-left-right">
-      <div class="col-xl-6 col-md-6">
-          <a class=" btn btn-secondary btn-user btn-block" href="{% url 'dashboard' %}">CANCEL</a>
-      </div>
-      <div class="col-xl-6 col-md-6">
+    <div class="row align-center">
+      <div class="col-xl-12 col-md-12">
+          <a class=" btn btn-primary btn-user" href="{% url 'dashboard' %}">Cancel</a>
           {% if form.instance.status_testnet == 2 %}
-            <button type="submit" class="btn btn-danger btn-block " disabled>
-              EDITING NOT AVAILABLE
+            <button type="submit" class="btn btn-danger " disabled>
+              Editing not available
             </button>
           {% else %}
-            <button type="submit" class="btn btn-success btn-block ">
-              {{ form.instance.pk|yesno:"SAVE,CREATE" }} THIS TESTNET
+            <button type="submit" class="btn btn-primary ">
+              {{ form.instance.pk|yesno:"Save,Create" }}
             </button>
           {% endif %}
       </div>
+
     </div>
   </form>
 </div>
-<br><br><hr><br><br>
+<br>
 {%endblock%}

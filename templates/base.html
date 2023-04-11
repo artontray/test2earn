@@ -39,7 +39,7 @@
                     {% else %}
                     <!--If Not connected, only Connect and Register button available-->
                         <li class="nav-item mr-2">
-                            <a class="btn btn-success btn-user btn-block" href="{% url 'account_login' %}">Connect</a>
+                            <a class="nav-link" href="{% url 'account_login' %}">Connect</a>
                         </li>
                         <li class="nav-item mr-2">
                             <a class="btn btn-primary btn-user btn-block" href="{% url 'account_signup' %}">Register</a>
@@ -62,7 +62,7 @@
                             <div class="card-body">
                                 <div class="row my-2">
                                     <div class="col-xl-12 col-sm-12 col-md-12 ">
-                                        <p>This account is blocked! please contact admin@TestnetOrganizer.com for more information(s)</p>
+                                        <p>This account is blocked! please contact us via Telegram for more information(s)</p>
                                     </div>
                                 </div>
                                 <br><br><hr><br>

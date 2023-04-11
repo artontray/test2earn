@@ -5,15 +5,15 @@
             <div class="pagination justify-content-center my-4">
                 <span class="step-links">
                     {% if page_obj.has_previous %}
-                    <a class="btn btn-outline-dark btn-sm mb4 ml-1" href="?page=1{% if extra_url_args %}&{{ extra_url_args }}{% endif %}">First</a>
-                    <a class="btn btn-outline-dark btn-sm mb4 ml-1" href="?page={{ page_obj.previous_page_number }}{% if extra_url_args %}&{{ extra_url_args }}{% endif %}">Previous</a>
+                    <a class="btn btn-primary btn-sm mb4 ml-1" href="?page=1{% if extra_url_args %}&{{ extra_url_args }}{% endif %}">First</a>
+                    <a class="btn btn-primary btn-sm mb4 ml-1" href="?page={{ page_obj.previous_page_number }}{% if extra_url_args %}&{{ extra_url_args }}{% endif %}">Previous</a>
                     {% endif %}
-                    <span class="current text-dark">
+                    <span class="current text-primary">
                         Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
                     </span>
                     {% if page_obj.has_next %}
-                    <a class="btn btn-outline-dark btn-sm mb4 ml-1" href="?page={{ page_obj.next_page_number }}{% if extra_url_args %}&{{ extra_url_args }}{% endif %}">Next</a>
-                    <a class="btn btn-outline-dark btn-sm mb4 ml-1" href="?page={{ page_obj.paginator.num_pages }}{% if extra_url_args %}&{{ extra_url_args }}{% endif %}">Last</a>
+                    <a class="btn btn-primary btn-sm mb4 ml-1" href="?page={{ page_obj.next_page_number }}{% if extra_url_args %}&{{ extra_url_args }}{% endif %}">Next</a>
+                    <a class="btn btn-primary btn-sm mb4 ml-1" href="?page={{ page_obj.paginator.num_pages }}{% if extra_url_args %}&{{ extra_url_args }}{% endif %}">Last</a>
                     {% endif %}
                 </span>
             </div>

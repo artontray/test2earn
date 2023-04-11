@@ -50,6 +50,9 @@ def manage_exp_user(user, action):
         user_info.exp += exp
     elif action == "subtract":
         user_info.exp -= exp
+        if user_info.exp <= 100:
+            user_info.exp = 100
+        
     else:
         pass
     return user_info.save()
@@ -145,18 +148,7 @@ class DeleteTestnet(generic.CreateView):
                     "Your wallet 1 : " + re.sub(
                         html_pattern, '', testnet.wallet1_adress)
                         ) + "<br>"
-                message += (
-                    "Private key Wallet 1 : " + re.sub(
-                        html_pattern, '', testnet.wallet1_priv_key)
-                        ) + "<br>"
-                message += (
-                    "Seed Wallet 1 : " + re.sub(
-                        html_pattern, '', testnet.wallet1_seed)
-                        ) + "<br>"
-                message += (
-                    "Clue Wallet 1 : " + re.sub(
-                        html_pattern, '', testnet.wallet1_clue)
-                        ) + "<br>"
+                
                 message += (
                     "password Wallet 1 : " + re.sub(
                         html_pattern, '', testnet.wallet1_password)
@@ -168,18 +160,6 @@ class DeleteTestnet(generic.CreateView):
                 message += (
                     "Your wallet 2 : " + re.sub(
                         html_pattern, '', testnet.wallet2_adress)
-                        ) + "<br>"
-                message += (
-                    "Private key Wallet 2 : " + re.sub(
-                        html_pattern, '', testnet.wallet2_priv_key)
-                        ) + "<br>"
-                message += (
-                    "Seed Wallet 2 : " + re.sub(
-                        html_pattern, '', testnet.wallet2_seed)
-                        ) + "<br>"
-                message += (
-                    "Clue Wallet 2 : " + re.sub(
-                        html_pattern, '', testnet.wallet2_clue)
                         ) + "<br>"
                 message += (
                     "password Wallet 2 : " + re.sub(
@@ -299,8 +279,12 @@ class CopyTestnet(generic.CreateView):
         t.wallet2_session = ''
         t.pk = None
         t.save()
-        testnet_to_copy.copied_nb += 1
-        testnet_to_copy.save()
+        # We increment copied testnet if only user who copy is not the owner
+        if request.user != testnet_to_copy.author:
+            testnet_to_copy.copied_nb += 1
+            testnet_to_copy.save()
+        
+        
         # If user is the author of the expected copied Testnet
         if request.user == testnet_to_copy.author:
             url = reverse('showtestnet', args=[t.slug])
@@ -378,9 +362,9 @@ class GiveAdmin(generic.UpdateView):
             add_notification_user(
                 user_to_update.user, (
                     f"<code>{self.request.user.username}</code>" +
-                    "deleted you as an " +
-                    "admin", "Admin -1"
-                ))
+                    " deleted you as an " +
+                    "admin"), "Admin -1"
+                )
             add_notification_user(
                 self.request.user, (
                     f"You deleted {user_to_update.user.username}" +
@@ -398,7 +382,7 @@ class GiveAdmin(generic.UpdateView):
                 user_to_update.user, (
                     f"<code>{self.request.user.username}</code> added " +
                     "you as admin on the App," +
-                    "Welcome!"), "Admin +1")
+                    " Welcome!"), "Admin +1")
             add_notification_user(
                 self.request.user, (
                     f"You added <code>{user_to_update.user.username}</code>" +
@@ -461,9 +445,9 @@ class FormTestnetMixin:
             # this testnet will receive a Notification
             for user in all_users_following_this_user:
                 add_notification_user(
-                    user.user, "{self.request.user.username} just created" +
+                    user.user, "{self.request.user.username} just created " +
                     f"a new Testnet, <a href='{url}' target='_blank'>" +
-                    "Check it out now</a>", "Following Testnet +1")
+                    " Check it out now</a>", "Following Testnet +1")
         # self.test_if_author()
         if self.action == 'UpdateTestnet':
             add_notification_user(self.request.user, (
@@ -738,7 +722,7 @@ class ReportTestnet(generic.DetailView):
                 testnets.save()
             add_notification_user(
                 testnet_to_report.author, f"{self.request.user.username}" +
-                "have cancelled the report" +
+                "have cancelled the report " +
                 "on your testnet <a href='{url}' target='_blank'>" +
                 testnet_to_report.testnet_name + "</a>", "Testnet +1")
             add_notification_user(
@@ -862,7 +846,7 @@ class AdminitrateTestnet(generic.ListView):
     """
     model = Testnet
     template_name = "administratetestnet.html"
-    paginate_by = 8
+    paginate_by = 30
 
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
@@ -905,7 +889,7 @@ class AdminitrateUsers(generic.ListView):
     """
     model = UserInfo
     template_name = "administrateusers.html"
-    paginate_by = 8
+    paginate_by = 30
 
     def get(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
@@ -941,7 +925,7 @@ class ShowNewTestnetAll(LoginRequiredMixin, generic.ListView):
     """
     model = Testnet
     template_name = "shownewtestnetall.html"
-    paginate_by = 8
+    paginate_by = 30
 
     def get_queryset(self):
         """
@@ -981,7 +965,7 @@ class ShowTestnetall(LoginRequiredMixin, generic.ListView):
     """
     model = Testnet
     template_name = "showtestnetall.html"
-    paginate_by = 8
+    paginate_by = 30
 
     def get(self, request, *args, **kwargs):
         """

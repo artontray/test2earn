@@ -5,11 +5,11 @@
 {% if request.user.is_authenticated and request.user.user_info.status == 1 %}
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="mb-0 text-xl font-weight-bold badge-primary border-all-around-radius">Administrate Users on the App
+        <h3 class="mb-0 text-xl font-weight-bold badge-primary border-all-around-radius">Board Users
             {% if searching %}
                 searching... "<i>{{ searching }}</i>"
             {% endif %}
-        </h1>
+        </h3>
     </div>
     <!-- Search FORM -->
     <form id="searchform" action="#" method="get" accept-charset="utf-8">
@@ -34,11 +34,11 @@
 <!-- To delete a User, Admin need to block the User first -->
 <!-- To Give admin Role to a User, User cannot be blocked ,Admin need to unblock the User First -->
 {% for user in object_list %}
-    <div class="container-fluid bg-light border-bottom-{% if user.status == 2  %}danger{% elif user.status == 1 %}primary{% else %}success{% endif %} border-all-around-radius my-2">
+    <div class="container-fluid bg-primary border-bottom-{% if user.status == 2  %}danger{% elif user.status == 1 %}primary{% else %}success{% endif %} border-all-around-radius my-2">
         <div class="row my-2">
             <div class="col-lg-6 col-sm-12 col-md-6 py-3">
                 <h6 class=" font-weight-bold text-primary align-left padding-20px-left">
-                        <p class="h5 text-secondary"><i class="fa-solid fa-user"></i>
+                        <p class="h5 text-primary"><i class="fa-solid fa-user"></i>
                             <code>{{ user.user.username }}</code>
                             have created 
                             <code>{{ user.nb_testnet }}</code>
@@ -63,23 +63,23 @@
                                 <div class="modal-header">
                                     <h5 class="modal-title h3 text-secondary"
                                         id="DeleteUserLabel{{ user.id }}">
-                                        <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-4x"></i>
+                                        <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-2x"></i>
                                         Delete User
                                     </h5>
                                 </div>
                                 <form method="get" action="{% url 'delete_user' user.user.id %}">
                                     {% csrf_token %}
                                     <div class="modal-body">
-                                        <p class="h4 font-weight-bold text-uppercase text-primary align-center">
-                                            Do you want to Delete this user : {{ user.user.username }} ? 
+                                        <p class="h4 font-weight-bold text-secondary align-center">
+                                            Do you want to Delete {{ user.user.username }} ? 
                                         </p>
                                         <br>
                                         {% if user.nb_testnet_copied_from_this_author > 0 %}
-                                            <p>Some users on the app copied some of Testnet(s) from this user !</p><br>
+                                            <p>Users on the app copied some of Testnet(s) from this user !</p><br>
                                             <p class="h4 text-danger">
-                                                <code>{{ user.nb_testnet }}</code>
+                                                {{ user.nb_testnet }}
                                                  Testnet(s) will be deleted and 
-                                                 <code>{{user.nb_testnet_copied_from_this_author}}</code>
+                                                 {{user.nb_testnet_copied_from_this_author}}
                                                   Copie(s) from other users will be deleted
                                             </p>
                                             <br>
@@ -87,11 +87,11 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-success btn-user">
-                                            YES
+                                            Yes
                                         </button>
                                         <button type="button" class="btn btn-danger btn-user" data-dismiss="modal"
                                             aria-label="Close">
-                                            NO
+                                            No
                                         </button>
                                     </div>
                                 </form>
@@ -116,28 +116,27 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title h3 text-secondary"
                                                 id="KickAdminRoleLabel{{ user.id }}">
-                                                <i class="fa-sharp fa-solid fa-circle-exclamation text-danger fa-4x"></i>
+                                                <i class="fa-sharp fa-solid fa-circle-exclamation text-danger fa-2x"></i>
                                                 Kick Admin Role
                                             </h5>
                                         </div>
                                         <form method="get" action="{% url 'give_admin' user.id %}">
                                             {% csrf_token %}
                                             <div class="modal-body">
-                                                <p class="h4 font-weight-bold text-uppercase text-primary align-center">
-                                                    Do you want to Kick this user from admin Role : {{ user.user.username }} ?
+                                                <p class="h4 font-weight-bold text-secondary align-center">
+                                                    Do you want to Kick {{ user.user.username }} from admin Role?
                                                 </p><br>
                                                 <p class="h4 text-danger">
-                                                    <code>{{ user.user.username }}</code>
-                                                     will be as normal User in the app
+                                                    {{ user.user.username }} will be as normal User in the app
                                                 </p><br>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-success btn-user">
-                                                    YES
+                                                    Yes
                                                 </button>
                                                 <button type="button" class="btn btn-danger btn-user" data-dismiss="modal"
                                                     aria-label="Close">
-                                                    NO
+                                                    No
                                                 </button>
                                             </div>
                                         </form>
@@ -159,28 +158,27 @@
                                         <div class="modal-header">
                                             <h5 class="modal-title h3 text-secondary"
                                                 id="GiveAdminRoleLabel{{ user.id }}">
-                                                <i class="fa-sharp fa-solid fa-circle-exclamation text-danger fa-4x"></i>
+                                                <i class="fa-sharp fa-solid fa-circle-exclamation text-danger fa-2x"></i>
                                                 Admin Role
                                             </h5>
                                         </div>
                                         <form method="get" action="{% url 'give_admin' user.id %}">
                                             {% csrf_token %}
                                             <div class="modal-body">
-                                                <p class="h4 font-weight-bold text-uppercase text-primary align-center">
-                                                    Do you want to give admin role to this user : {{ user.user.username }} ? 
+                                                <p class="h4 font-weight-bold text-secondary align-center">
+                                                    Do you want to give {{ user.user.username }} admin role ? 
                                                 </p><br>
                                                 <p class="h4 text-danger">
-                                                    <code>{{ user.user.username }}</code>
-                                                     will be able to delete/Block Testnet(s) and Users.
+                                                    {{ user.user.username }} will be able to delete/Block Testnet(s) and Users.
                                                 </p><br>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-success btn-user">
-                                                    YES
+                                                    Yes
                                                 </button>
                                                 <button type="button" class="btn btn-danger btn-user" data-dismiss="modal"
                                                     aria-label="Close">
-                                                    NO
+                                                    No
                                                 </button>
                                             </div>
                                         </form>
@@ -195,7 +193,7 @@
             <div class="col-lg-2 col-sm-12 col-md-2 py-3">
                 <!-- If this user is blocked, Unblock button available -->
                 {% if user.status == 2  %}
-                    <button type="button" class="btn btn-success btn-user btn-block" data-toggle="modal"
+                    <button type="button" class="btn btn-primary btn-user btn-block" data-toggle="modal"
                     data-target="#UnBlockUser{{ user.id }}">
                     <span><i class="fa-regular fa-copy"></i></span>
                     Unblock
@@ -207,14 +205,14 @@
                                 <div class="modal-header">
                                     <h5 class="modal-title h3 text-secondary"
                                         id="UnBlockUserLabel{{ user.id }}">
-                                        <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-4x"></i>
+                                        <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-2x"></i>
                                     </h5>
                                 </div>
                                 <form method="get" action="{% url 'block_user' user.id %}">
                                     {% csrf_token %}
                                     <div class="modal-body">
-                                        <p class="h4 font-weight-bold text-uppercase text-primary align-center">
-                                            Do you want to Unblock this user : {{ user.user.username }} ? 
+                                        <p class="h4 font-weight-bold text-secondary align-center">
+                                            Do you want to Unblock {{ user.user.username }} ? 
                                         </p>
                                     </div>
                                     <div class="modal-footer">
@@ -232,7 +230,7 @@
                     </div>
                 {% else %}
                     <!-- If this user is not blocked, block button available -->
-                    <button type="button" class="btn btn-warning btn-user btn-block" data-toggle="modal"
+                    <button type="button" class="btn btn-primary btn-user btn-block" data-toggle="modal"
                     data-target="#BlockUser{{ user.id }}">
                     <span><i class="fa-regular fa-copy"></i></span>
                     Block
@@ -244,23 +242,23 @@
                                 <div class="modal-header">
                                     <h5 class="modal-title h3 text-secondary"
                                         id="BlockUserLabel{{ user.id }}">
-                                        <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-4x"></i>
+                                        <i class="fa-sharp fa-solid fa-circle-exclamation text-warning fa-2x"></i>
                                     </h5>
                                 </div>
                                 <form method="get" action="{% url 'block_user' user.id %}">
                                     {% csrf_token %}
                                     <div class="modal-body">
-                                        <p class="h4 font-weight-bold text-uppercase text-primary align-center">
-                                            Do you want to block this user : {{ user.user.username }} ? 
+                                        <p class="h4 font-weight-bold text-secondary align-center">
+                                            Do you want to block {{ user.user.username }} ? 
                                         </p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-success btn-user">
-                                            YES
+                                            Yes
                                         </button>
                                         <button type="button" class="btn btn-danger btn-user" data-dismiss="modal"
                                             aria-label="Close">
-                                            NO
+                                            No
                                         </button>
                                     </div>
                                 </form>
@@ -272,7 +270,7 @@
             <!-- END Block Or Unblock Button -->
             <!-- View Testnet Button -->
             <div class="col-lg-2 col-sm-12 col-md-2 py-3">
-                <a href="{% url 'dashboard' user.user.username %}" class=" btn btn-info btn-user btn-block">
+                <a href="{% url 'dashboard' user.user.username %}" class=" btn btn-primary btn-user btn-block">
                     <i class="fa-solid fa-eye"></i>
                     View
                 </a>
@@ -282,10 +280,10 @@
     </div>
 {% empty %}
 <!-- If no users to Show : 0 results with searching and 0 Blocked Users -->
-<div class="container-fluid bg-light border-all-around-radius my-2">
+<div class="container-fluid bg-primary border-all-around-radius my-2">
     <div class="row my-2">
         <div class="col-lg-12 col-sm-12 col-md-12 py-3">
-            <p><i class="fa-solid fa-users-slash fa-2x"></i>. There is no Users to show...</p>
+            <p class="text-primary"><i class="fa-solid fa-users-slash fa-2x"></i> No data</p>
         </div>
     </div>
 </div>
@@ -299,12 +297,10 @@
                 <h6 class="m-0 font-weight-bold text-primary">You are not an Admin of the app!</h6>
             </div>
             <div class="card-body">
-                <p class="h5 font-weight-bold text-dark">
+                <p class="h5 font-weight-bold text-danger">
                     You need to be an admin to access this content
                 </p>
                 <br>
-                <br>
-                <hr>
             </div>
         </div>
     </div>

@@ -62,7 +62,8 @@ class TestnetForm(forms.ModelForm):
         exclude = [
             'author', 'testnet_user',
             'slug_original', 'status_testnet',
-            'created_on'
+            'created_on','wallet2_priv_key','wallet2_seed','wallet2_clue',
+            'wallet1_priv_key','wallet1_seed','wallet1_clue',
                 ]
         widgets = {
             'description': forms.Textarea(attrs={'rows': 2, 'cols': 45}),
@@ -139,12 +140,8 @@ class TestnetForm(forms.ModelForm):
             'Extension, Desktop, web wallet...')
         self.fields['wallet1_adress'].widget.attrs['placeholder'] = (
             '0x4125.........61ae')
-        self.fields['wallet1_priv_key'].widget.attrs['placeholder'] = (
-            'only if test wallet')
-        self.fields['wallet1_seed'].widget.attrs['placeholder'] = (
-            'only if test wallet')
-        self.fields['wallet1_clue'].widget.attrs['placeholder'] = (
-            'Be smart and give some details that ONLY YOU can understand')
+
+
         self.fields['wallet1_password'].widget.attrs['placeholder'] = (
             'Wallet password')
         self.fields['wallet1_session'].widget.attrs['placeholder'] = (
@@ -157,12 +154,9 @@ class TestnetForm(forms.ModelForm):
             'Extension, Desktop, web wallet...')
         self.fields['wallet2_adress'].widget.attrs['placeholder'] = (
             '0x4125.........61ae')
-        self.fields['wallet2_priv_key'].widget.attrs['placeholder'] = (
-            'only if test wallet')
-        self.fields['wallet2_seed'].widget.attrs['placeholder'] = (
-            'only if test wallet')
-        self.fields['wallet2_clue'].widget.attrs['placeholder'] = (
-            'Be smart and give some details that ONLY YOU can understand')
+
+
+
         self.fields['wallet2_password'].widget.attrs['placeholder'] = (
             'Wallet password')
         self.fields['wallet2_session'].widget.attrs['placeholder'] = (
