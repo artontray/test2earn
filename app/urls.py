@@ -42,6 +42,7 @@ urlpatterns = [
         ), name='administrate_users'),
     path('administratetestnet/', views.AdminitrateTestnet.as_view(
         ), name='administrate_testnet'),
+        
     path('giveadmin/<int:id>', views.GiveAdmin.as_view(
         ), name='give_admin')
 ]

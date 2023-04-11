@@ -92,17 +92,14 @@ class DeleteTestnet(generic.CreateView):
         current_user = get_object_or_404(queryset, user=request.user.id)
         queryset = Testnet.objects.all()
         testnet_to_delete = get_object_or_404(queryset, slug=slug)
-        if (testnet_to_delete.testnet_user == current_user.user) or (
+        if (testnet_to_delete.author == current_user.user) or (
                 current_user.status == 1):
             html_pattern = "<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>"
             '''
             This regex been taken from
             https://uibakery.io/regex-library/html-regex-python
             '''
-            all_testnet_to_delete = Testnet.objects.all().filter(
-                Q(slug_original=testnet_to_delete.slug)
-                | Q(slug=testnet_to_delete.slug)
-                )
+            all_testnet_to_delete = Testnet.objects.all().filter(slug_original=slug)
             # Before Deleting a Testnet we send the Testnet user info
             # into Notification
             # If user/admin delete a Testnet which have been copied
@@ -183,11 +180,7 @@ class DeleteTestnet(generic.CreateView):
                 #   If testnet_user and author is same we substract exp
                 if testnet_to_delete.author == testnet_to_delete.testnet_user:
                     manage_exp_user(testnet_to_delete.testnet_user, "subtract")
-                    messages.add_message(
-                        self.request, messages.SUCCESS, (
-                            "You deleted a Testnet successfully and all" +
-                            " users who copied this Testnet will receive a" +
-                            "Notification about it!"))
+                    
                 else:
                     add_notification_user(
                         current_user.user, (
@@ -202,10 +195,21 @@ class DeleteTestnet(generic.CreateView):
                         "The Testnet called  %s have been deleted" % (
                             testnet_to_delete.testnet_name)
                             ), "Testnet -1")
-                    return HttpResponseRedirect(
-                        reverse('administrate_testnet'))
+            testnet_to_delete.delete()       
+            messages.add_message(
+                        self.request, messages.SUCCESS, (
+                            "You deleted a Testnet successfully and all" +
+                            " users who copied this Testnet will receive a " +
+                            "Notification about it!"))       
+                     
             return HttpResponseRedirect(reverse('dashboard'))
-
+        elif(testnet_to_delete.testnet_user == current_user.user):
+            testnet_to_delete.delete()
+            add_notification_user(current_user.user, (
+                    "The Testnet {testnet_to_delete.testnet_name}" +
+                    " have been deleted"), "Testnet -1")
+            messages.add_message(self.request, messages.SUCCESS, (
+                    "You deleted a Testnet successfully"))
         else:
             add_notification_user(current_user.user, (
                 "You cannot delete this Testnet : <code>%s</code>" +
@@ -837,6 +841,7 @@ class ShowNotifications(LoginRequiredMixin, generic.DetailView):
             }
         )
         return context
+
 
 
 class AdminitrateTestnet(generic.ListView):

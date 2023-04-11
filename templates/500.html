@@ -2,16 +2,8 @@
 {% load static %}
 {% block content %}
 
-<!--404 error -->
-<div class="row padding-10-pourcent-left-right">
-    <!-- Illustrations -->
-    <div class="col-xl-12 col-md-12">
-        <div class="text-center">
-            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                src="{% static 'assets/images/error.png' %}" alt="Image for 500 error">
-        </div>
-    </div>
-</div>
+<!--500 error -->
+
 <div class="row padding-10-pourcent-left-right">
     <div class="col-xl-12 col-md-12">
         <div class="card shadow h-100 mb-4">
@@ -19,7 +11,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">Error 500</h6>
             </div>
             <div class="card-body">
-                <p class="h5 font-weight-bold text-dark">
+                <p class="h5 font-weight-bold text-primary">
                     You are Lost, go back <a href="{% url 'home' %}">Home</a>
                 </p>
             </div>

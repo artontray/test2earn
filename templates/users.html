@@ -117,7 +117,7 @@
                                             <form method="get" action="{% url 'add_favorite_user' current_user.user.id %}">
                                                 {% csrf_token %}
                                                 <div class="modal-body">
-                                                    <p class="h5 font-weight-bold text-primary align-center">
+                                                    <p class="h5 font-weight-bold text-secondary align-center">
                                                         Do you want to start following {{ current_user.user.username }} ? </p>
                                                 </div>
                                                 <div class="modal-footer">

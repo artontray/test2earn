@@ -114,6 +114,19 @@ class Notifications(models.Model):
         return f"{self.title}"
 
 
+class Invitations(models.Model):
+    """
+    Model for Invitations
+    """
+    title = models.CharField(max_length=35)
+
+
+
+    def __str__(self):
+        return f"{self.title}"
+
+
+
 class UserInfo(models.Model):
     """
     Model for User Info Table

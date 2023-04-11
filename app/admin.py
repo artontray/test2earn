@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Testnet, Notifications
-from .models import UserInfo, CheckList
+from .models import UserInfo, CheckList, Invitations
 from django_summernote.admin import SummernoteModelAdmin
 """
     This page allow admin to display the content of Tables
@@ -17,6 +17,13 @@ class TestnetAdmin(SummernoteModelAdmin):
                     'slug', 'slug_original', 'category', 'created_on')
     search_fields = ('testnet_name', 'description')
     summernote_fields = ('description', 'tasks_description')
+
+@admin.register(Invitations)
+class InvitationsAdmin(admin.ModelAdmin):
+    """
+    Allows admin to manage user Invitations via the admin panel
+    """
+    list_display = ('title','id')
 
 
 @admin.register(Notifications)
