@@ -4566,7 +4566,7 @@ input[type="button"].btn-block {
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;
-  padding: 1.25rem;
+  padding: 0.25rem;
 }
 
 .card-title {
@@ -4665,9 +4665,18 @@ input[type="button"].btn-block {
   }
   .card-deck .card {
     flex: 1 0 0%;
-    margin-right: 0.75rem;
+    margin-right: 5px;
     margin-bottom: 0;
-    margin-left: 0.75rem;
+    margin-left: 5px;
+  }
+
+}
+
+@media (max-width: 576px) {
+  .container-fluid {
+    margin-right: 5px;
+    margin-bottom: 0;
+    margin-left: 5px;
   }
 }
 
@@ -9854,8 +9863,8 @@ a:focus {
 .container-md,
 .container-lg,
 .container-xl {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .scroll-to-top {

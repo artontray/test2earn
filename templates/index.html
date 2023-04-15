@@ -2,8 +2,10 @@
 {% load static %}
 {% block content %}
 <!-- Page Heading -->
+<div class="container">
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h3 class="mb-0 text-xl font-weight-bold badge-primary border-all-around-radius">Home</h3>
+</div>
 </div>
 <!--<div class="row padding-10-pourcent-left-right">
     <div class="col-xl-12 col-md-12">
@@ -27,7 +29,7 @@
 -->
 
 
-<div class="container-fluid feature-image-outer">
+<div class="container feature-image-outer">
     <div class="row padding-10-pourcent-left-right">
         <div class="col-12 col-md-12 col-lg-12 col-xl-4 mb-2">
             <div class="feature-image mb-2 align-center">
@@ -84,6 +86,8 @@
         </div>
     </div>
 </div>
+
+<div class="container">
 <div class="row padding-10-pourcent-left-right">
     <!-- Stats about the App -->
     <!-- Box 1 -->
@@ -125,6 +129,10 @@
         </div>
     </div>
 </div>
+</div>
+
+
+<div class="container">
 <div class="row padding-10-pourcent-left-right">
     <div class="col-xl-12 col-md-12">
         {% if user.is_authenticated %}
@@ -133,6 +141,7 @@
         <div class="align-center"><a href="{% url 'account_login' %}" class="btn btn-primary">CONNECT TO THE APP</a></div>
         {% endif %}
     </div>
+</div>
 </div>
 <br>
 

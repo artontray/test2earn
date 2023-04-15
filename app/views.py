@@ -449,7 +449,7 @@ class FormTestnetMixin:
             # this testnet will receive a Notification
             for user in all_users_following_this_user:
                 add_notification_user(
-                    user.user, "{self.request.user.username} just created " +
+                    user.user, f"{self.request.user.username} just created " +
                     f"a new Testnet, <a href='{url}' target='_blank'>" +
                     " Check it out now</a>", "Following Testnet +1")
         # self.test_if_author()
