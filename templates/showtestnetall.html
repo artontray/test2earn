@@ -52,7 +52,7 @@
 {% for testnet in object_list %}
 <!-- If Testnet Belong to the current User connected-->
 {% if testnet.author == request.user and testnet.testnet_user == request.user %}
-<div class="container bg-primary border-all-around-radius my-2">
+<div class="container bg-dark border-all-around-radius my-2">
     <div class="row my-2">
         <div class="col-lg-5 col-sm-12 col-md-5 py-3">
             <h6 class=" font-weight-bold text-primary align-left padding-20px-left">
@@ -128,7 +128,7 @@
     </div>
 </div>
 {% elif testnet.testnet_user == request.user and testnet.author != request.user %}
-<div class="container bg-primary border-all-around-radius my-2">
+<div class="container bg-dark border-all-around-radius my-2">
     <div class="row my-2">
         <div class="col-lg-5 col-sm-12 col-md-5 py-3">
             <h6 class=" font-weight-bold text-primary align-left padding-20px-left">

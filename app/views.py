@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
+from django.db.models import Case, When
 from django.db.models import F, Q
 from django.http import HttpResponseRedirect
 from .models import Testnet
@@ -998,6 +999,10 @@ class ShowTestnetall(LoginRequiredMixin, generic.ListView):
         search = self.request.GET.get("searching", None)
 
         if search:
+
+            user_at_top = [self.request.user]
+
+
             '''If user/author of the testnet is blocked we exclude it'''
             qs = qs.exclude(testnet_user__user_info__status=2).filter(
                 (Q(author=F('testnet_user'))) | Q(
@@ -1007,7 +1012,8 @@ class ShowTestnetall(LoginRequiredMixin, generic.ListView):
                 Q(testnet_name__icontains=search)
                 | Q(description__icontains=search)
                 | Q(testnet_user__username__icontains=search)
-            )
+            ).order_by(
+            Case(When(testnet_user__in=user_at_top, then=0), default=1))
         else:
             qs = qs.exclude(testnet_user__user_info__status=2).filter(
                 testnet_user=self.testnet_user)
